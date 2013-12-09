@@ -57,7 +57,7 @@ ul {
   padding-left: 10px;
   margin-bottom: 0;
   float: left;
-  clear: both;
+  /*clear: both;*/
 }
 .dinner .panel-body .week-cell li {
   border-radius: 4px;
@@ -73,6 +73,10 @@ ul {
 .dinner .panel-body .week-cell li.holiday {
   background-color: #f5f5f5;/* #faebcc;*/
 }
+
+.dinner .panel-body .weekend {
+    color: #e02d2d;
+}
 .dinner .panel-body .week-cell li.workday:hover {
   /*background-color: #eee; #f5f5f5; #dff0d8;*/
 }
@@ -82,21 +86,22 @@ ul {
   cursor: pointer;
 }
 
-.dinner .panel-body .week-cell li.selected {
+.dinner .panel-body .week-cell .has_booked {
   background-color: #428bca;
   color: white;
 }
-.dinner .panel-body .week-cell li.selected:hover {
+.dinner .panel-body .week-cell .has_booked:hover {
   background-color: #428bca;
 
 }
-.today {
-   transition:border linear .2s,box-shadow linear .5s;
- -moz-transition:border linear .2s,-moz-box-shadow linear .5s;
- -webkit-transition:border linear .2s,-webkit-box-shadow linear .5s;
- outline:none;border-color:#ed9c28;
- box-shadow:0 0 12px #ed9c28;
- -moz-box-shadow:0 0 12px #ed9c28;
- -webkit-box-shadow:0 0 12px #ed9c28;
+.dinner .panel-body .week-cell .today {
+    transition:border linear .2s,box-shadow linear .5s;
+    -moz-transition:border linear .2s,-moz-box-shadow linear .5s;
+    -webkit-transition:border linear .2s,-webkit-box-shadow linear .5s;
+    outline:none;border-color:#ed9c28;
+    box-shadow:0 0 12px #ed9c28;
+    -moz-box-shadow:0 0 12px #ed9c28;
+    -webkit-box-shadow:0 0 12px #ed9c28;
+    background-color: #fb0 !important;
 }
 
