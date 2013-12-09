@@ -33,7 +33,7 @@ urlpatterns += patterns('',
     # todo: 泛username类型URL。无法区别常规URL与username based URL, 故仅去掉斜杠以区分正则
     # url(r'^(?P<username>\w+)$', views.ProfileView.as_view(), {'tpl': 'public/profile.html'}),
     url(r'^profile/$', profile.ProfileView.as_view(), {'tpl': 'public/profile.html'}, name='profile'),
-    url(r'^profile/avatar$', profile.AvatarView.as_view(), {'tpl': 'public/profile.html'}, name='avatar'),
+    url(r'^profile/avatar$', profile.AvatarView.as_view(), {'tpl': ''}, name='avatar'),
 
     url(r'^message/(?P<mail_id>.+)?/?$', message.MessageView.as_view(), {'tpl': 'public/message/index.html'}, name='message'),
 

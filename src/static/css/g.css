@@ -102,6 +102,8 @@ ul {
   float: none;
 }
 
+.nav .avatar { height: 28px; }
+
 /* -------------- sidebar ---------------*/
 @media (min-width: 768px) {
 .sidebar {

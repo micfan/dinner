@@ -67,16 +67,11 @@ class ProfileView(BaseLoginRequiredView):
             messages.add_message(request, messages.INFO, '无效的用户名或密码。')
             return render(request, tpl)
 
+
 class AvatarView(BaseLoginRequiredView):
 
     def __init__(self):
         super(AvatarView, self).__init__()
-
-    def get(self, request, tpl):
-        """"""
-        var = {}
-
-        return render(request, tpl, var)
 
     def post(self, request, *args, **kwargs):
         response = uploads.UploadView.as_view()(self.request)
@@ -85,4 +80,4 @@ class AvatarView(BaseLoginRequiredView):
         media_filepath = j.get('data').get('media_filepath')
         request.user.avatar = media_filepath
         request.user.save()
-        return HttpResponseRedirect(request.build_absolute_uri())
+        return HttpResponseRedirect(reverse('public:profile'))

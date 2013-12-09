@@ -148,7 +148,11 @@ class User(AbstractBaseUser, PermissionsMixin):
             return 0
 
     def get_avatar(self):
-        return ''.join([settings.MEDIA_URL, self.avatar])
+        if self.avatar:
+            return ''.join([settings.MEDIA_URL, self.avatar])
+        else:
+            default_avatar = '/static/img/avatar/normal/panda_omg.gif'
+            return default_avatar
 
 
 class Calendar(models.Model):
