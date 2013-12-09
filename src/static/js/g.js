@@ -12,7 +12,7 @@ $(function() {
 // using jQuery
 function getCookie(name) {
     var cookieValue = null;
-    if (document.cookie && document.cookie != '') {
+    if (document.cookie && document.cookie !== '') {
         var cookies = document.cookie.split(';');
         for (var i = 0; i < cookies.length; i++) {
             var cookie = jQuery.trim(cookies[i]);
@@ -42,7 +42,23 @@ $.ajaxSetup({
 });
 
 
+
+
+
 }); /// Global annomous function end
 
+
 Vue.config.delimiters = ["[", "]"];
+
+
+
+window.mic = {
+  DEBUG: window.__debug,
+  url: {
+    FEErrorReport: window.__FEErrorReportUrl
+  }
+};
+
+
+
 

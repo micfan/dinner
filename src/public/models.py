@@ -152,6 +152,39 @@ class Conf(models.Model):
     def __unicode__(self):
         return self.name
 
+# todo: websocket online chat
+# todo: gevent libs researching
+# todo:
+# class Mail(models.Model):
+#     """消息"""
+#     user = models.ForeignKey(User)
+#     content = models.CharField('内容', max_length=50)
+#     been_read = models.BooleanField('已读', default=False)
+#     trashed = models.BooleanField('已删除', default=False)
+#     spam = models.BooleanField('垃圾', default=False)
+#     created_at = models.DateTimeField(auto_now_add=True)
+#
+#     def __unicode__(self):
+#         return self.name
+
+
+# class FEException(models.Model):
+#     """前端异常"""
+#     # 用户
+#     user = models.ForeignKey(User, null=True)
+#     message = models.CharField('内容', max_length=100)
+#     # 0=debug, 1=info, 2=warn, 3=error, 4=crit(critical)
+#     level = models.SmallIntegerField('等级', default=0)
+#     url = models.URLField(null=True)
+#     browser = models.CharField('浏览器', null=True)
+#     # 处理: 0=unresolved, 1=fixing, 2=fixed, 3=released
+#     process = models.SmallIntegerField('处理状态', default=0)
+#     remark = models.CharField('备注', null=True)
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
+#
+#     def __unicode__(self):
+#         return self.message
 
 
 

@@ -2,7 +2,7 @@
 from django.conf.urls import patterns, url, include
 from django.conf import settings
 
-from public import views, signup, profile
+from public import views, signup, profile, log
 
 urlpatterns = patterns('public.views',
     url(r'^$', 'index', {'tpl': 'public/index.html'}),
@@ -47,6 +47,6 @@ urlpatterns += patterns('',
     url(r'^profile/$', views.ProfileView.as_view(), {'tpl': 'public/profile.html'}, name='profile'),
 )
 
-# urlpatterns += patterns('public.signup',
-#
-# )
+urlpatterns += patterns('',
+    url(r'^fe-error-report/$', log.FEErrorCollectView.as_view(), name='fe_report_url'),
+)

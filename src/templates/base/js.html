@@ -3,8 +3,13 @@
 
 {% compress js %}
   <script src="{% static 'bower/jquery/dist/jquery.min.js' %}"></script>
-  {% if not debug %}
-    <script>
+  <script>
+    {% if debug %}
+      window.__debug = true;
+      window.__FEErrorReportUrl = {% url 'fe_report_url' %}
+    {% else %}
+      window.__debug = true;
+      /// 百度统计
       var _hmt = _hmt || [];
       (function() {
         var hm = document.createElement("script");
@@ -12,11 +17,12 @@
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
       })();
-    </script>
-  {% endif %}
+    {% endif %}
+  </script>
   <script src="{% static 'bower/bootstrap/dist/js/bootstrap.min.js' %}"></script>
   <script src="{% static 'bower/vue/dist/vue.min.js' %}"></script>
   <script src="{% static 'js/g.js' %}"></script>
+  <script src="{% static 'js/log.js' %}"></script>
 {% endcompress %}
 
 {% block js %}

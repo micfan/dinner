@@ -5,7 +5,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 # django_compressor
-COMPRESS_ENABLED = True
+COMPRESS_ENABLED = not True
 
 MEDIA_ROOT = os.path.join(VAR_ROOT, 'uploads')
 STATIC_ROOT = os.path.join(VAR_ROOT, 'static')

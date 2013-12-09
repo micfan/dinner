@@ -1,8 +1,12 @@
-{% extends 'base/base.html' %}
+{% extends 'base/base_sidebar.html' %}
 {% load static from staticfiles %}
-{% block title %}{{ user.username }}{% endblock %}
-{% block body %}
+{% load compress %}
+{% block title %}{{ user.username }}的账号{% endblock %}
+{% block header %}我的资料{% endblock %}
+{% block content %}
 {#  todo: gravator, 多国语言#}
+
+
   <ul>
     <li>
       <label>Username:</label><span>{{ user.username }}</span>
@@ -15,12 +19,17 @@
     </li>
   </ul>
 
-  <div id="editor">
-  <textarea v-model="input" debounce="300"></textarea>
-  <div v-html="input | marked"></div>
-</div>
+
+
+{#  <div id="editor">#}
+{#  <textarea v-model="input" debounce="300"></textarea>#}
+{#  <div v-html="input | marked"></div>#}
+{#</div>#}
 
 {% endblock %}
+
 {% block js %}
-  <script src="{% static 'js/profile.js' %}"></script>
+  {% compress js %}
+    <script src="{% static 'js/profile.js' %}"></script>
+  {% endcompress %}
 {% endblock %}
