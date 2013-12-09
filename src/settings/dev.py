@@ -14,6 +14,9 @@ DATABASES = {
         'NAME': 'src',
 #        'USER': 'dbuser',
 #        'PASSWORD': 'dbpassword',
+        'OPTIONS': {
+            'timeout': 20
+        }
     }
 }
 

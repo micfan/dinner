@@ -19,8 +19,8 @@ class IndexView(View):
     def __init__(self):
         super(IndexView, self).__init__()
         self.now = datetime.datetime.now()
-        self.deadline = 15  # 15:00
-        self.deadline_curr_text = u'已截止' if self.now.hour >= self.deadline else u'进行中'
+        self.deadline_hour = 15  # 15:00 截止
+        self.deadline_curr_text = u'已截止' if self.now.hour >= self.deadline_hour else u'进行中'
         Calendars = Calendar.objects.filter(year=self.now.year, month=self.now.month, day=self.now.day)
         if Calendars.count() == 1:
             self.curr_cal = Calendars[0]
@@ -55,7 +55,8 @@ class IndexView(View):
         var = {
             'order_count': Order.objects.filter(calendar__id=self.curr_cal.id).count(),
             'curr_cal': self.curr_cal,
-            'deadline': self.deadline,
+            'curr_now': self.now,
+            'deadline_hour': self.deadline_hour,
             'deadline_curr_text': self.deadline_curr_text,
             'curr_provider': self.curr_provider,
             'this_month_cals': this_month_cals,
@@ -68,11 +69,15 @@ class IndexView(View):
         return render(request, tpl, var)
 
     # todo: 修饰器
-    # todo: 扩充接口参数改为y, m, d
+    # todo: 扩充接口参数改为y, m, d, 以便外部API调用
     def post(self, request, tpl):
+        """API: 订阅接口
+        :return JsonResult {}
+        """
         j = JsonResult(message='预定成功', data=0)
         if not request.user.is_authenticated():
             return HttpResponse(j.error(4).json(), 'application/json')
+
 
         cal_id = request.POST.get('cal_id')
         has_booked = request.POST.get('has_booked')
@@ -85,9 +90,21 @@ class IndexView(View):
                     Order.objects.filter(calendar__id=cal_id, user=request.user).delete()
                     j.message = '该日晚餐预定已取消'
                 else:
-                    # todo: 参数合法性检查, 如：是否假日、是过去日前点: def is_avilable_calendar(y, m, d, cal_id=0);
+                    # todo: API参数合法性检查, 如：是否假日、是过去日前点: def is_avilable_calendar(y, m, d, cal_id=0);
                     cal = Calendar.objects.get(id=cal_id, is_holiday=False)
-                    order, created = Order.objects.get_or_create(calendar=cal, user=request.user)
+
+                    # 过去的某天
+                    if datetime.datetime(cal.year, month=cal.month, day=cal.day) <\
+                        datetime.datetime(self.now.year, month=self.now.month, day=self.now.day):
+                        return HttpResponse(j.error(3).json(), 'application/json')
+
+                    # 今天截止时间
+                    if cal.id == self.curr_cal.id and self.now.hour >= self.deadline_hour:
+                        return HttpResponse(j.error(5).json(), 'application/json')
+
+                    # 不用get_or_create()导致sqlite3 database clocked
+                    if not Order.objects.filter(calendar=cal, user=request.user).exists():
+                        Order.objects.create(calendar=cal, user=request.user)
                     # 今日已预定数量
                     j.data = Order.objects.filter(calendar__id=self.curr_cal.id).count()
             except Calendar.DoesNotExist:
