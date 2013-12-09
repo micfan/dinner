@@ -9,4 +9,3 @@ from django.views.generic.detail import DetailView
 from django.views.decorators.http import require_http_methods, require_GET, require_POST, require_safe
 from django.views.decorators.csrf import csrf_protect
 
-from src.apps.misc import *

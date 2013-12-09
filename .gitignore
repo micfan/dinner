@@ -1,3 +1,5 @@
+src/var/dev.db
+
 *.pyc
 *.egg-info
 src/settings/local.py

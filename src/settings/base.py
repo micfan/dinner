@@ -27,9 +27,9 @@ LANGUAGES = (
 SECRET_KEY = 'dd24gm48g6m(jfy-@fir0t#h9tih33(2_^%^9w1_^=5!&0qu6q'
 
 INSTALLED_APPS = (
-    # 'src.apps.',
-
-    #'south',
+    'public',
+    'dinner',
+    'apps',
 
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,7 +39,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.admindocs',
-    'pipeline',
 )
 
 #==============================================================================
@@ -48,9 +47,8 @@ INSTALLED_APPS = (
 
 import os
 import sys
-import src as project_module
 
-PROJECT_DIR = os.path.dirname(os.path.realpath(project_module.__file__))
+PROJECT_DIR = os.path.dirname(os.path.dirname(__file__))
 
 PYTHON_BIN = os.path.dirname(sys.executable)
 ve_path = os.path.dirname(os.path.dirname(os.path.dirname(PROJECT_DIR)))
@@ -74,9 +72,10 @@ if not os.path.exists(VAR_ROOT):
 #==============================================================================
 # Project URLS and media settings
 #==============================================================================
+APPEND_SLASH = True
+ROOT_URLCONF = 'root_urls'
 
-ROOT_URLCONF = 'src.urls'
-
+AUTH_USER_MODEL = 'public.User'
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 LOGIN_REDIRECT_URL = '/'
@@ -84,20 +83,21 @@ LOGIN_REDIRECT_URL = '/'
 STATIC_URL = '/static/'
 MEDIA_URL = '/uploads/'
 
+
 STATIC_ROOT = os.path.join(VAR_ROOT, 'static')
 MEDIA_ROOT = os.path.join(VAR_ROOT, 'uploads')
 
-STATICFILES_DIRS = (
+STATICFILES_DIRS = [
     os.path.join(PROJECT_DIR, 'static'),
+]
+
+STATICFILES_FINDERS = (
+  "django.contrib.staticfiles.finders.FileSystemFinder",
+  "django.contrib.staticfiles.finders.AppDirectoriesFinder"
 )
 
-# STATICFILES_FINDERS = (
-#   "django.contrib.staticfiles.finders.FileSystemFinder",
-#   "django.contrib.staticfiles.finders.AppDirectoriesFinder"
-# )
-
-# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.CachedStaticFilesStorage'
-STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+# STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 #==============================================================================
 # Templates
@@ -108,23 +108,21 @@ TEMPLATE_DIRS = (
 )
 
 # TEMPLATE_LOADERS = (
-#     # 'jinja2loader.Loader', 
-#     'src.settings.jinja2_for_django.Loader',
 #     'django.template.loaders.app_directories.Loader',
 # )
 
 TEMPLATE_LOADERS = (
-    ('django.template.loaders.cached.Loader', (
-        'django.template.loaders.filesystem.Loader',
-        'django.template.loaders.app_directories.Loader',
-    )),
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+    # ('django.template.loaders.cached.Loader', (
+    #     'django.template.loaders.filesystem.Loader',
+    #     'django.template.loaders.app_directories.Loader',
+    # )),
 )
 
-# JINJA2_DJANGO_FILTER_LIBRARIES = (
-#     'load'
-# )
-
 TEMPLATE_CONTEXT_PROCESSORS += (
+  'django.core.context_processors.csrf',
+  'django.contrib.messages.context_processors.messages',
 )
 
 #==============================================================================
@@ -133,6 +131,8 @@ TEMPLATE_CONTEXT_PROCESSORS += (
 
 MIDDLEWARE_CLASSES += (
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
 )
 
 #==============================================================================
@@ -140,6 +140,7 @@ MIDDLEWARE_CLASSES += (
 #==============================================================================
 
 AUTHENTICATION_BACKENDS += (
+  # 'django.contrib.auth.backends.ModelBackend',
 )
 
 #==============================================================================
