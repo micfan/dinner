@@ -1,4 +1,5 @@
 {% extends 'base/base.html' %}
+{% load static from staticfiles %}
 {% block title %}{{ user.username }}{% endblock %}
 {% block body %}
 {#  todo: gravator, 多国语言#}
@@ -14,4 +15,12 @@
     </li>
   </ul>
 
+  <div id="editor">
+  <textarea v-model="input" debounce="300"></textarea>
+  <div v-html="input | marked"></div>
+</div>
+
+{% endblock %}
+{% block js %}
+  <script src="{% static 'js/profile.js' %}"></script>
 {% endblock %}

@@ -1,16 +1,21 @@
 {% load static from staticfiles %}
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{{ title }}">
-    <meta name="author" content="Michael Fan">
-    <link rel="shortcut icon" href="{{ 'favicon.ico' }}">
+{% load compress %}
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="{{ title }}">
+<meta name="author" content="Michael Fan">
+<link rel="shortcut icon" href="{{ 'favicon.ico' }}">
 
 
-
+{% compress css %}
     <!-- Bootstrap core CSS -->
     <link href="{% static 'bower/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+
+
     <link href="{% static 'css/g.css' %}" rel="stylesheet">
+{% endcompress %}
 
     <!-- Custom styles for this template -->
     <!-- <link href="jumbotron.css" rel="stylesheet"> -->

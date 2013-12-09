@@ -40,6 +40,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.admindocs',
+
+    # django_compressor
+    'compressor',
 )
 
 #==============================================================================
@@ -94,7 +97,8 @@ STATICFILES_DIRS = [
 
 STATICFILES_FINDERS = (
   "django.contrib.staticfiles.finders.FileSystemFinder",
-  "django.contrib.staticfiles.finders.AppDirectoriesFinder"
+  "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+  'compressor.finders.CompressorFinder',
 )
 
 # STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
