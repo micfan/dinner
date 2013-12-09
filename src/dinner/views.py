@@ -2,6 +2,7 @@
 
 import datetime
 import calendar
+import json
 
 from django.shortcuts import render
 from django.views.generic import View
@@ -19,6 +20,7 @@ class IndexView(View):
     def __init__(self):
         super(IndexView, self).__init__()
         self.now = datetime.datetime.now()
+        # todo: 加到public.model.Conf中
         self.deadline_hour = 15  # 15:00 截止
         self.deadline_curr_text = u'已截止' if self.now.hour >= self.deadline_hour else u'进行中'
         Calendars = Calendar.objects.filter(year=self.now.year, month=self.now.month, day=self.now.day)
@@ -38,13 +40,15 @@ class IndexView(View):
     # todo: 类内修饰器
     # @login_required
     def get(self, request, tpl):
-        this_month_cals = Calendar.objects.filter(year=2015, month=self.now.month).extra(
-          select={
-              'has_booked': "select count(*) from dinner_order \
+        if request.user.is_authenticated():
+            select = {
+              'has_booked': ("select count(*) from dinner_order \
                             where dinner_order.calendar_id = public_calendar.id \
-                            and dinner_order.user_id = 1"
-          }
-        )
+                            and dinner_order.user_id = %d" % request.user.id)
+            }
+        else:
+            select = {"has_booked": 0}
+        this_month_cals = Calendar.objects.filter(year=2015, month=self.now.month).extra(select=select)
         if not this_month_cals.exists():
             raise Exception('日历配置错误')
         # 计算空缺
@@ -62,10 +66,7 @@ class IndexView(View):
             'this_month_cals': this_month_cals,
             'frirst_week_place_holder': range(frirst_week_place_holder)
         }
-        if self.curr_cal:
-            o = Order.objects.filter(calendar=self.curr_cal).annotate(Count('user_id'))
-            var['order_count'] = o[0].user_id__count if o.count() == 1 else 0
-            var['is_holiday'] = self.curr_cal.is_holiday
+
         return render(request, tpl, var)
 
     # todo: 修饰器
@@ -78,7 +79,6 @@ class IndexView(View):
         if not request.user.is_authenticated():
             return HttpResponse(j.error(4).json(), 'application/json')
 
-
         cal_id = request.POST.get('cal_id')
         has_booked = request.POST.get('has_booked')
 
@@ -90,7 +90,7 @@ class IndexView(View):
                     Order.objects.filter(calendar__id=cal_id, user=request.user).delete()
                     j.message = '该日晚餐预定已取消'
                 else:
-                    # todo: API参数合法性检查, 如：是否假日、是过去日前点: def is_avilable_calendar(y, m, d, cal_id=0);
+                    # todo: API: def is_avilable_calendar(y, m, d, cal_id=0);
                     cal = Calendar.objects.get(id=cal_id, is_holiday=False)
 
                     # 过去的某天
@@ -111,6 +111,26 @@ class IndexView(View):
                 j.error(3)
         else:
             j.error(3)
+        return HttpResponse(j.json(), 'application/json')
+
+
+class OrderView(View):
+    def __init__(self):
+        super(OrderView, self).__init__()
+        d = IndexView()
+        self.curr_cal = d.curr_cal
+
+    # todo: 做页面，加参数format=json来格式化接口
+    def get(self, request, tpl):
+        """API: 今天已预定人数"""
+        j = JsonResult()
+        o = Order.objects.filter(calendar__id=self.curr_cal.id).extra(select={
+          'username': "select username from public_user where public_user.id = dinner_order.user_id"
+        })
+        j.message = o.count()
+        order_users = o.values_list('username', flat=True)
+        order_users = [u.encode('utf-8') for u in order_users]
+        j.data = order_users
         return HttpResponse(j.json(), 'application/json')
 
 

@@ -57,5 +57,5 @@ def main():
 class Command(BaseCommand):
     """命令"""
     def handle(self, *args, **options):
-        print '-'*80
+        print ('-'*80)
         main()
