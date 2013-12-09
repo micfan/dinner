@@ -9,11 +9,10 @@ from django.conf.global_settings import *   # pylint: disable=W0614,W0401
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-
-
 SITE_ID = 1
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
+# todo: insert db time is false
 TIME_ZONE = 'Asia/Shanghai'
 USE_TZ = True
 USE_I18N = True

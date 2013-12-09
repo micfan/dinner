@@ -35,12 +35,14 @@ var test = new Vue({
             var url = '/dinner/';  // todo: js动态URL
             var pdata = {
               selected: Number(this.selected),
-              cal_id: 333
+              cal_id: 84
             };
             // todo: jQuery.Ajax能利用Http StatusCode吗?
+            // todo: Loading菊花。。
             $.post(url, pdata, function(response) {
               if (response.ec === 0) {
-                 self.selected = !self.selected;
+                self.selected = !self.selected;
+                $('#order_count').html(response.data);
               } else {
                 // todo: 显示错误提示
                 ///
