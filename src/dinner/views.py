@@ -22,9 +22,11 @@ class IndexView(View):
         super(IndexView, self).__init__()
         self.now = datetime.datetime.now()
 
+
         try:
             deadline_time_str = Conf.objects.get(name='book_end_time')
-            _deadline_time = datetime.datetime.strptime(deadline_time_str.content, '%H:%S')
+            _deadline_time = datetime.datetime.strptime(deadline_time_str.content, '%H:%M')
+            print _deadline_time
             self.deadline_datetime = datetime.datetime(year=self.now.year, month=self.now.month, day=self.now.day,
                                                    hour=_deadline_time.hour, minute=_deadline_time.minute)
         except Conf.DoesNotExist:
@@ -45,6 +47,8 @@ class IndexView(View):
             self.curr_provider = None
             raise Exception(u"日历配置错误")
 
+        self.order_count = Order.objects.filter(calendar__id=self.curr_cal.id).count()
+
     # todo: 类内修饰器
     # @login_required
     def get(self, request, tpl):
@@ -56,7 +60,8 @@ class IndexView(View):
             }
         else:
             select = {"has_booked": 0}
-        this_month_cals = Calendar.objects.filter(year=2015, month=self.now.month).extra(select=select)
+        this_month_cals = Calendar.objects.filter(year=2015, month=self.now.month).extra(select=select
+            ).order_by('day')
         if not this_month_cals.exists():
             raise Exception('日历配置错误')
         # 计算空缺
@@ -65,7 +70,7 @@ class IndexView(View):
         frirst_week_place_holder = 7 - len(set(first_week) - {0})
 
         var = {
-            'order_count': Order.objects.filter(calendar__id=self.curr_cal.id).count(),
+            'order_count': self.order_count,
             'curr_cal': self.curr_cal,
             'curr_now': self.now,
             'deadline_datetime': self.deadline_datetime,
@@ -127,18 +132,32 @@ class OrderView(View):
         super(OrderView, self).__init__()
         d = IndexView()
         self.curr_cal = d.curr_cal
+        self.order_count = d.order_count
+
 
     # todo: 做页面，加参数format=json来格式化接口
     def get(self, request, tpl):
         """API: 今天已预定人数"""
         j = JsonResult()
         o = Order.objects.filter(calendar__id=self.curr_cal.id).extra(select={
+          'cn_name': "select cn_name from public_user where public_user.id = dinner_order.user_id",
           'username': "select username from public_user where public_user.id = dinner_order.user_id"
-        }).order_by('username')
+        }).order_by('-cn_name')
         j.message = o.count()
-        order_users = o.values_list('username', flat=True)
+        order_users = o.values_list('cn_name', flat=True)
         order_users = [u.encode('utf-8') for u in order_users]
         j.data = order_users
-        return HttpResponse(j.json(), 'application/json')
+
+        format = request.GET.get('f')
+        if format == 'json':
+            return HttpResponse(j.json(), 'application/json')
+        else:
+            var = {
+                'j': j.dict(),
+                'curr_cal': self.curr_cal,
+                'order_count': self.order_count
+            }
+            print j.dict()
+            return render(request, tpl, var)
 
 
