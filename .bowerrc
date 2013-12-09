@@ -1,0 +1,10 @@
+{
+  "directory": "src/static/bower",
+  "endpoint": "https://bower.mycompany.com",
+  "json": "bower.json",
+  "color": true,
+  "searchpath": [
+    "https://bower.herokuapp.com"
+  ],
+  "shorthand_resolver": "git://example.com/{{{ organization }}}/{{{ package }}}.git"
+}
