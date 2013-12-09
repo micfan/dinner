@@ -79,8 +79,12 @@ class UserAdmin(UserAdmin):
     ordering = ('email',)
     filter_horizontal = ()
 
+
+from public.models import Conf
+
 # Now register the new UserAdmin...
 admin.site.register(User, UserAdmin)
+admin.site.register(Conf)
 # ... and, since we're not using Django's built-in permissions,
 # unregister the Group model from admin.
 # admin.site.unregister(Group)
