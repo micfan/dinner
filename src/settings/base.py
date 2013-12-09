@@ -14,7 +14,7 @@ TEMPLATE_DEBUG = DEBUG
 SITE_ID = 1
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 USE_TZ = True
 USE_I18N = True
 USE_L10N = True
@@ -108,9 +108,14 @@ TEMPLATE_DIRS = (
 )
 
 TEMPLATE_LOADERS = (
+    # 'jinja2loader.Loader', 
     'src.settings.jinja2_for_django.Loader',
-    'django.template.loaders.app_directories.Loader',
+    # 'django.template.loaders.app_directories.Loader',
 )
+
+# JINJA2_DJANGO_FILTER_LIBRARIES = (
+#     'load'
+# )
 
 TEMPLATE_CONTEXT_PROCESSORS += (
 )
