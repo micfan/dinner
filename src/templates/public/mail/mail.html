@@ -1,10 +1,11 @@
 {% extends 'base/base_sidebar.html' %}
 {% load static from staticfiles %}
 {% load compress %}
-{% block title %}{{ user.username }}的账号{% endblock %}
+{% block title %}
+  {% if user.count_unread_mails > 0 %}({{ user.count_unread_mails }}) {% endif %}我的消息{% endblock %}
 {% block header %}我的消息{% endblock %}
 {% block content %}
-
+{# todo: 消息和通知的区别, 参考Twitter #}
 
 
 {% endblock %}
