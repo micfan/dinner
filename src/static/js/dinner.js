@@ -1,14 +1,3 @@
-// dinner.js
-// ~~~~~~~~~
-// Micheal Fan, 2015-03-23
-
-// 配置Vue变量标签
-/*Vue.config.delimiters = ["[", "]"];
-
-Vue.directive('disable', function (value) {
-    this.el.disabled = !!value;
-});
-*/
 "use strict";
 
 $(function () {

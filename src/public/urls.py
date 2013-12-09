@@ -2,7 +2,7 @@
 from django.conf.urls import patterns, url, include
 from django.conf import settings
 
-from public import views, signup, profile, log, message
+from public import views, signup, profile, log, message, uploads
 
 urlpatterns = patterns('public.views',
     url(r'^$', 'index', {'tpl': 'public/index.html'}, name='index'),
@@ -39,6 +39,7 @@ urlpatterns += patterns('',
     # url(r'^(?P<username>\w+)$', views.ProfileView.as_view(), {'tpl': 'public/profile.html'}),
     url(r'^profile/$', views.ProfileView.as_view(), {'tpl': 'public/profile.html'}, name='profile'),
     url(r'^message/(?P<mail_id>.+)?/?$', message.MessageView.as_view(), {'tpl': 'public/message/index.html'}, name='message'),
+    url(r'^upload/$', uploads.UploadView.as_view(), {'tpl': 'public/upload.html'}, name='upload'),
 
     url(r'^api/', include('apis.urls'), name='apis'),
 )

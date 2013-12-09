@@ -86,11 +86,11 @@ LOGOUT_URL = '/logout/'
 LOGIN_REDIRECT_URL = '/'
 
 STATIC_URL = '/static/'
-MEDIA_URL = '/uploads/'
+MEDIA_URL = '/media/'
 
 
 STATIC_ROOT = os.path.join(VAR_ROOT, 'static')
-MEDIA_ROOT = os.path.join(VAR_ROOT, 'uploads')
+MEDIA_ROOT = os.path.join(VAR_ROOT, 'media')
 
 STATICFILES_DIRS = [
     os.path.join(PROJECT_DIR, 'static'),

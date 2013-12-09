@@ -1,0 +1,15 @@
+{% extends 'base/base_sidebar.html' %}
+{% load static from staticfiles %}
+{% load compress %}
+{% block title %}{{ user.username }}的账号{% endblock %}
+{% block header %}上传文件{% endblock %}
+{% block content %}
+<form action="{% url 'public:upload' %}" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+{#  <input type="file" name="file" class="btn btn-default">#}
+  <span class="btn btn-default btn-file">
+    Browse <input type="file" name="file">
+  </span>
+  <input type="submit" class="btn btn-default">
+</form>
+{% endblock %}

@@ -4,6 +4,7 @@ src/settings/prod.py
 
 src/var/dev.db
 src/var/*.csv
+src/var/media
 src/deb.db
 *.sql
 
@@ -35,7 +36,6 @@ lib/
 lib64/
 parts/
 sdist/
-var/
 *.egg-info/
 .installed.cfg
 *.egg

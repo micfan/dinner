@@ -45,12 +45,7 @@ $.ajaxSetup({
 
 
 
-}); /// Global annomous function end
-
-
-Vue.config.delimiters = ["[", "]"];
-
-
+}); /// Global annomous function
 
 window.mic = {
   DEBUG: window.__debug,
