@@ -33,8 +33,8 @@
     </li>
   </ul>
   <div class="col-sm-3 text-center">
-    {% with default_avatar="http://tp3.sinaimg.cn/1773574690/180/5674535515/1" %}
-      <img src="{{ user.avatar|default:'http://img3.douban.com/icon/user_large.jpg' }}"
+    {% with default_avatar='/static/img/avatar/normal/panda_king.jpg' %}
+      <img src="{{ user.avatar|default:default_avatar }}"
         class="profile-avatar">
       <button type="button" class="btn btn-default btn-linear-gradient-fc" id="upload-new-avatar">
         Upload new picture
