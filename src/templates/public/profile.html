@@ -7,6 +7,10 @@
 {#  todo: gravator, 多国语言#}
   <ul class="box-list">
     <li class="item">
+      <label>CnName:</label>
+      <span>{{ user.cn_name|default:'' }}</span>
+    </li>
+    <li class="item">
       <label>Username:</label>
       <span>{{ user.username }}</span>
     </li>
@@ -14,10 +18,7 @@
       <label>Email:</label>
       <span>{{ user.email|default:'' }}</span>
     </li>
-    <li class="item">
-      <label>CnName:</label>
-      <span>{{ user.cn_name|default:'' }}</span>
-    </li>
+
     <li class="item">
       <label>ID:</label>
       <span>{{ user.idcard_no|default:'' }}</span>
@@ -25,6 +26,10 @@
     <li class="item">
       <label>Telephone:</label>
       <span>{{ user.telephone|default:'' }}</span>
+    </li>
+    <li class="item">
+      <label>Org:</label>
+      <span>{{ user.org.name|default:'' }}</span>
     </li>
   </ul>
 
