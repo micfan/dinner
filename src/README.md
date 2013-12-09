@@ -8,7 +8,7 @@ Install
 Database
 ======
 ```
-$ postgres -D /user/local/postgres  # Run as daemon
+$ postgres -D /user/local/postgres  # Run as daemon Mac OSX: /usr/local/var/postgres
 $ createdb dinner [password] 
 $ dropdb dinner
 $ pg_dump -U django(username) dinner(dbname) > dinner.export.sql ## Dumps data

@@ -6,7 +6,7 @@
   <script>
     {% if debug %}
       window.__debug = true;
-      window.__FEErrorReportUrl = {% url 'fe_report_url' %}
+      window.__FEErrorReportUrl = {% url 'public:fe_report_url' %}
     {% else %}
       window.__debug = true;
       /// 百度统计

@@ -6,7 +6,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-  url(r'', include('public.urls')),
+  url(r'', include('public.urls', namespace='public')),
   url('^', include('django.contrib.auth.urls')),
 
   url(r'^dinner/', include('dinner.urls', namespace='dinner', app_name='dinner')),
