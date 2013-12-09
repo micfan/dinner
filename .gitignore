@@ -1,6 +1,7 @@
 src/settings/__init__.py
 
 src/var/dev.db
+src/deb.db
 
 *.pyc
 *.egg-info

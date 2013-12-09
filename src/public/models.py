@@ -98,7 +98,7 @@ class Calendar(models.Model):
     day = models.SmallIntegerField('日')
     # 1=是节假日
     is_holiday = models.SmallIntegerField('是节假日', default=0)
-    holiday_mark = models.CharField('节假日说明', max_length=50)
+    holiday_mark = models.CharField('节假日说明', null=True, max_length=50)
 
     def get_full_datetime(self):
         # todo: 返回datetime()格式
@@ -111,8 +111,27 @@ class Calendar(models.Model):
 class Conf(models.Model):
     """配置"""
     name = models.CharField('名称', max_length=50)
+    content = models.CharField('内容', max_length=100)
     desc = models.CharField('配置说明', max_length=50)
-    content = models.CharField('配置说明', max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return self.name
+
+# todo: Group设置：供应商组，采购商组？
+class Org(models.Model):
+    """组织"""
+    name = models.CharField('名称', max_length=50)
+    code = models.CharField('编码', max_length=50)
+    location = models.CharField('位置', max_length=200, null=True)
+    telephone = models.CharField('手机', max_length=30, null=True)
+    phone = models.CharField('固话', max_length=30, null=True)
+    manager = models.ForeignKey(User, null=True)
+    url = models.URLField('链接地址', null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return self.name
 
 
