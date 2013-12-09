@@ -58,7 +58,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     org = models.ForeignKey(Org, null=True)
     #注意：不继承PermissionsMixin类，是无法实现使用Django Group功能的，本人的项目需要使用所以继承该类。
     email = models.EmailField(verbose_name='email address', max_length=255, null=True, unique=True)
-    # private_email = models.EmailField(verbose_name='email address', max_length=255, null=True, unique=True)
+    private_email = models.EmailField(verbose_name='email address', max_length=255, null=True, unique=True)
+    # 车牌号码
+    car_no = models.CharField(max_length=50, null=True)
     # 用户登录名
     username = models.CharField(max_length=100, unique=True, db_index=True)
     # 英文名
