@@ -134,7 +134,7 @@ class OrderView(View):
         j = JsonResult()
         o = Order.objects.filter(calendar__id=self.curr_cal.id).extra(select={
           'username': "select username from public_user where public_user.id = dinner_order.user_id"
-        })
+        }).order_by('username')
         j.message = o.count()
         order_users = o.values_list('username', flat=True)
         order_users = [u.encode('utf-8') for u in order_users]

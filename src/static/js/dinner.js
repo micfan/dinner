@@ -32,7 +32,7 @@ $(function () {
   }
 
   (function main() {
-
+    // todo: 登录跳转
     $('.is-changeable').on('click', function() {
       toggleBookStatus($(this));
     });
