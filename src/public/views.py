@@ -46,7 +46,8 @@ class LoginView(View):
             return render(request, tpl, var)
 
     def post(self, request, tpl):
-        user = authenticate(username=request.POST.get('email'), password=request.POST.get('password'))
+        email = request.POST.get('email')
+        user = authenticate(username=email, password=request.POST.get('password'))
         if user is not None and user.is_active:
             login(request, user)
             self.next_url = request.POST.get('next') if request.POST.get('next') else self.next_url
@@ -54,7 +55,7 @@ class LoginView(View):
         else:
             # todo: i18n
             messages.add_message(request, messages.INFO, '无效的用户名或密码。')
-            return render(request, tpl)
+            return render(request, tpl, {'email': email})
 
 
 # todo: 用class based view实现吧
