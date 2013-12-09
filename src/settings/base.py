@@ -30,6 +30,7 @@ INSTALLED_APPS = (
     'dinner',
     'apps',
     'poll',
+    'misc',
 
     'django.contrib.auth',
     'django.contrib.contenttypes',

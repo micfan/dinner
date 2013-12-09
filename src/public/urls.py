@@ -13,6 +13,7 @@ urlpatterns = patterns('public.views',
 )
 
 urlpatterns += patterns('',
+
     # 登录
     url(r'^%s$' % settings.LOGIN_URL[1:], views.LoginView.as_view(), {'tpl': 'public/login.html'}, name='login'),
     # 登出
@@ -40,6 +41,10 @@ urlpatterns += patterns('',
     url(r'^reset/done/$', 'django.contrib.auth.views.password_reset_complete',
         {'template_name': 'public/password_reset_complete.html'},
         name='password_reset_complete'),
+
+    # todo: 泛username类型URL。无法区别常规URL与username based URL, 故仅去掉斜杠以区分正则
+    # url(r'^(?P<username>\w+)$', views.ProfileView.as_view(), {'tpl': 'public/profile.html'}),
+    url(r'^profile/$', views.ProfileView.as_view(), {'tpl': 'public/profile.html'}, name='profile'),
 )
 
 # urlpatterns += patterns('public.signup',
