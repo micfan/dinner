@@ -2,9 +2,9 @@
 {% load static from staticfiles %}
 {% load compress %}
 {% block title %}{{ user.username }}的账号{% endblock %}
-{% block header %}我的资料{% endblock %}
+{# TODO: CSS class it #}
+{% block header %}我的资料<button class="btn btn-default btn-sm" style="float: right; margin-top: -6px;">Edit</button>{% endblock %}
 {% block content %}
-{#  todo: gravator, 多国语言#}
   <ul class="box-list col-sm-9">
     <li class="item">
       <label>CnName:</label>
@@ -30,6 +30,11 @@
     <li class="item">
       <label>Org:</label>
       <span>{{ user.org.name|default:'' }}</span>
+    </li>
+    {#  todo: gravator, 多国语言#}
+    <li class="item">
+      <label>Language:</label>
+      <span>{{ user.lang|default:'中文简体' }}</span>
     </li>
   </ul>
   <div class="col-sm-3 text-center">

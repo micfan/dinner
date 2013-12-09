@@ -42,6 +42,7 @@ urlpatterns += patterns('',
     url(r'^upload/$', uploads.UploadView.as_view(), {'tpl': 'public/upload.html'}, name='upload'),
 
     url(r'^api/', include('apis.urls'), name='apis'),
+    url(r'^oauth2/', include('apps.oauth2.urls'), name='apps'),
 )
 
 urlpatterns += patterns('',

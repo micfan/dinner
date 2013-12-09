@@ -32,7 +32,7 @@ class LoginView(View):
 
     def __init__(self):
         super(LoginView, self).__init__()
-        self.next_url = reverse('dinner:index')
+        self.next_url = reverse('public:index')
 
 
     def get(self, request, tpl):

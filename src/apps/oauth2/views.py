@@ -18,21 +18,35 @@ from django.core.urlresolvers import reverse
 
 from django.contrib.auth import authenticate, login as auth_login
 
-from sns_api.models import WeiboUser, QQUser
+from apps.oauth2.models import WeiboUser, QQUser
 from django.contrib.auth.models import User,Group
-from account.models import Company, UserProfile, GroupUserMenu, UserMenu, RegisterSurvey, MobileValidation, AuthTokenInfo
-from credit.models import LevelRule
-from credit.views import update_user_points
-from utils.key_helper import gen_random, generate_key, format_baosteel_ip
+
+def LevelRule():
+    pass
+def update_user_points():
+    pass
+
+def gen_random():
+    pass
+def generate_key():
+    pass
+def format_baosteel_ip():
+    pass
+
+# from django.contrib.sites.models import get_current_site
+def get_current_site():
+    pass
+
 from django.contrib.auth.views import login as auth_login_view
-from django.contrib.sites.models import get_current_site
+
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 
 from weibo import APIClient
 from qq import OauthVars, OauthClient
-from utils.apis import is_captcha_match
+def is_captcha_match():
+    pass
 
 
 # production env config: baostar@sina.cn

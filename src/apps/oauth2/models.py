@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
-from django.contrib.auth.models import User
+from public.models import User
 from django.utils.encoding import force_unicode
 
 class WeiboUser(models.Model):

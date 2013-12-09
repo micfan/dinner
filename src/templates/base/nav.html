@@ -15,7 +15,8 @@
       <ul class="nav navbar-nav">
         <li class="{% active_sidebar_by_path 'upload' %}"><a href="{% url 'public:upload' %}">投稿</a></li>
         <li class="{% active_sidebar_by_path 'drawing' %}"><a href="{% url 'public:upload' %}">小画</a></li>
-        <li class="{% active_sidebar_by_path 'drawing' %}"><a href="{% url 'public:upload' %}">鬼畜</a></li>
+        <li class="{% active_sidebar_by_path 'writing' %}"><a href="{% url 'public:upload' %}">写字</a></li>
+        <li class="{% active_sidebar_by_path 'kichiku' %}"><a href="{% url 'public:upload' %}">鬼畜</a></li>
 {#        <li {% if path == '/dinner/'%}class="active"{% endif %}><a href="{% url 'dinner:index' %}">晚餐预订</a></li>#}
 {#        <li><a href="/static/game/2048/2048.html">娱乐</a></li>#}
 {#        <li {% if path == '/h/about/'%}class="active"{% endif %}><a href="/h/about/">关于我们</a></li>#}

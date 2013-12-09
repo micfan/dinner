@@ -29,6 +29,7 @@ INSTALLED_APPS = (
     'public',
     'dinner',
     'apps',
+    # 'apps.oauth2',
     'poll',
     'misc',
 
@@ -44,6 +45,7 @@ INSTALLED_APPS = (
 
     # django_compressor
     'compressor',
+    'django_extensions'
 )
 
 #==============================================================================

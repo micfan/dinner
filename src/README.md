@@ -23,6 +23,7 @@ sql > update public_user
 ## Test
 ```
 $ python manage.py test
+$ python manage.py show_urls
 ```
 
 ## Deploy

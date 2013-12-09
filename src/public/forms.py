@@ -24,10 +24,13 @@ class UserSignupForm(forms.ModelForm):
             'invalid': _("This value may contain only letters, numbers and "
                          "@/./+/-/_ characters.")})
     password1 = forms.CharField(label=_("Password"),
-        widget=forms.PasswordInput)
+                                widget=forms.PasswordInput)
     password2 = forms.CharField(label=_("Password confirmation"),
-        widget=forms.PasswordInput,
-        help_text=_("Enter the same password as above, for verification."))
+                                widget=forms.PasswordInput,
+                                help_text=_("Enter the same password as above, for verification."))
+    invite_code = forms.RegexField(label=_("Invention code"),
+                                   regex=r'^[^\s]{8}$',
+                                   help_text=_("Required. 8 characters: digital, Letters, digits or symbols"))
 
     class Meta:
         model = User
