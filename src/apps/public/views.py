@@ -11,6 +11,7 @@ from django.shortcuts import render_to_response
 
 def index(request, tpl):
   """Home page"""
+
   return render(request, tpl, {})
   # return HttpResponse(content='Hello, world!', status=200, content_type='text/html')
 

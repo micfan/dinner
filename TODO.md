@@ -4,6 +4,7 @@
 * use twwiter bower manage javascript files
 * write basic test case
 * seprate local settings from public's
+* DEBUG = False, but 500 Error
 
 
 django_pipeline

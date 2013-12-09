@@ -17,4 +17,6 @@ DATABASES = {
     }
 }
 
+
+
 # WSGI_APPLICATION = 'src.wsgi.dev.application'

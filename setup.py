@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='src',
+    name='Dinner',
     version='1.0',
-    description="",
-    author="Lincoln Loop",
-    author_email='info@lincolnloop.com',
-    url='',
+    description="Django testing project",
+    author="Michael Fan",
+    author_email='micfan.com',
+    url='http://www.micfan.com',
     packages=find_packages(),
     package_data={'src': ['static/*.*', 'templates/*.*']},
     scripts=['manage.py'],
