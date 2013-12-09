@@ -1,5 +1,6 @@
 # coding=utf-8
 # Initial table
+import datetime
 import calendar
 
 from django.core.management import BaseCommand
@@ -11,7 +12,7 @@ from dinner.models import CalendarProvider
 import subprocess
 import csv
 
-CURRENT_YEAR = 2016
+CURRENT_YEAR = datetime.datetime.now().year
 
 def init_calendar():
     """初始化日历"""
