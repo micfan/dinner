@@ -126,7 +126,7 @@ class Calendar(models.Model):
     month = models.SmallIntegerField('月')
     day = models.SmallIntegerField('日')
     # 1=是节假日
-    is_holiday = models.BooleanField('是节假日', default=False)
+    is_holiday = models.SmallIntegerField('是节假日', default=0)
     holiday_mark = models.CharField('节假日说明', null=True, max_length=50)
 
     def get_full_datetime(self):

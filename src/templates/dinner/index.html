@@ -42,15 +42,15 @@
 
           {% for cal in this_month_cals %}
               <li class="
-                    {% if user.is_authenticated and not cal.is_holiday %}
+                 {% if not cal.is_holidy %}workday
+                    {% if user.is_authenticated %}
                         {% if cal.day > curr_cal.day %}is-changeable
                         {% elif cal.day == curr_cal.day and curr_now < deadline_datetime %}is-changeable
                         {% endif %}
                     {% endif %}
-
+                 {% endif %}
                  {% if cal.has_booked %}has_booked
                  {% endif %}
-
                  {%if cal.id == curr_cal.id %}today
                  {% endif %}" cal-id="{{ cal.id }}
                  ">{{ cal.day }}</li>
