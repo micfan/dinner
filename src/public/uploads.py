@@ -53,18 +53,16 @@ class UploadView(BaseLoginRequiredView):
         var = {}
         return render(request, tpl, var)
 
-    def post(self, request, tpl):
+    def post(self, request,  *args, **kwargs):
         f = request.FILES['file']
         # TODO: file_url
         media_filepath = handle_uploaded_file(f)
         media_url = os.path.join(settings.MEDIA_URL, media_filepath)
         http_url = ''.join([request.scheme, '://', request.get_host(), media_url])
-
-        return HttpResponseRedirect(http_url)
-        # data = {
-        #     'file_url': http_url,
-        # }
-        # j = JsonResult(data=data)
-        # return HttpResponse(j.json(), 'application/json')
+        j = JsonResult(data={
+            'file_url': http_url,
+            'media_filepath': media_filepath
+        })
+        return HttpResponse(j.json(), 'application/json')
 
 

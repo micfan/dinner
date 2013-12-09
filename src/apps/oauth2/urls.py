@@ -9,10 +9,10 @@ urlpatterns = patterns('apps.oauth2.views',
     url(r'^weibo/user/create/', 'create_user_from_weibo', name='create_user_from_weibo'),
 )
 
-# urlpatterns += patterns('oauth2.views',
-#     url(r'^qq/login/$', 'qq_login', name='sns_qq_login'),
-#     url(r'^qq/login/done/', 'qq_auth', name='sns_qq_login_done'),
-#     url(r'^qq/user/bind/', 'bind_qq_user', {'template_name':'sns/bind_qq_user.html'}, name='bind_qq_user'),
-#     url(r'^qq/user/create/', 'create_user_from_qq', {'template_name':'sns/cteate_user_from_qq.html'}, name='sns_create_user_from_qq'),
-#
-# )
+urlpatterns += patterns('apps.oauth2.views',
+    url(r'^qq/login/$', 'qq_login', name='github'),
+    url(r'^qq/login/done/', 'qq_auth', name='sns_qq_login_done'),
+    url(r'^qq/user/bind/', 'bind_qq_user', {'template_name':'sns/bind_qq_user.html'}, name='bind_qq_user'),
+    url(r'^qq/user/create/', 'create_user_from_qq', {'template_name':'sns/cteate_user_from_qq.html'}, name='sns_create_user_from_qq'),
+
+)

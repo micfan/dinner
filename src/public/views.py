@@ -77,24 +77,3 @@ def html(request, tpl_prefix):
     tpl = 'html/%s.html' % tpl_prefix
     return render(request, tpl)
 
-
-class ProfileView(BaseLoginRequiredView):
-
-    def __init__(self):
-        super(ProfileView, self).__init__()
-
-    def get(self, request, tpl):
-        """"""
-        var = {}
-
-        return render(request, tpl, var)
-
-    def post(self, request, tpl):
-        user = authenticate(username=request.POST.get('email'), password=request.POST.get('password'))
-        if user is not None and user.is_active:
-            login(request, user)
-            return HttpResponseRedirect(self.next_url)
-        else:
-            # todo: i18n
-            messages.add_message(request, messages.INFO, '无效的用户名或密码。')
-            return render(request, tpl)

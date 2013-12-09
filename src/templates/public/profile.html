@@ -39,11 +39,16 @@
   </ul>
   <div class="col-sm-3 text-center">
     {% with default_avatar='/static/img/avatar/normal/panda_king.jpg' %}
-      <img src="{{ user.avatar|default:default_avatar }}"
+      <img src="{{ user.get_avatar|default:default_avatar }}"
         class="profile-avatar">
-      <button type="button" class="btn btn-default btn-linear-gradient-fc" id="upload-new-avatar">
-        Upload new picture
-      </button>
+      <form action="{% url 'public:avatar' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <span class="btn btn-default btn-file">
+          Upload <input type="file" name="file" onchange="this.form.submit()">
+        </span>
+{#        <input type="submit" class="btn btn-default" >#}
+      </form>
+
     {% endwith %}
   </div>
 

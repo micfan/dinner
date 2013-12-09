@@ -2,6 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 from django.core.cache import cache
+from django.conf import settings
 
 
 # todo: Group设置：供应商组，采购商组？
@@ -145,6 +146,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         except Exception, e:
             # todo: 记录Django日志
             return 0
+
+    def get_avatar(self):
+        return ''.join([settings.MEDIA_URL, self.avatar])
 
 
 class Calendar(models.Model):
