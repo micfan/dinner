@@ -12,28 +12,36 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import BaseListView
 
 from .base_views import BaseLoginRequiredView
+from models import Message, User
 
 
-
-# MAIL_HOME = reverse('public:mail')
+# MAIL_HOME = reverse('public:message')
 MAIL_HOME = ''
 
-class MailView(BaseLoginRequiredView):
+class MessageView(BaseLoginRequiredView):
 
     def __init__(self):
-        super(MailView, self).__init__()
+        super(MessageView, self).__init__()
 
     def get(self, request, tpl, mail_id):
         """"""
-        var = {}
+        var = {
+            'messages': request.user.get_unread_messages()
+            # 'messages': [
+            #     {'content': 'hello, world!'},
+            #     {'content': 'hello, world!'},
+            #     {'content': 'hello, world!'}
+            # ]
+        }
 
         return render(request, tpl, var)
 
     def post(self, request, tpl):
-        email = request.POST.get('email')
-        not_found = True if None else False
+        message = request.POST.get('content')
+        to = request.POST.get('to')
+        not_found = False if User.objects.filter(id=to) else True
         if not_found:
-            return HttpResponseRedirect(MAIL_HOME)
+            return HttpResponse()
 
         else:
             # todo: i18n

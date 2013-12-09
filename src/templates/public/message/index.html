@@ -5,7 +5,12 @@
   {% if user.count_unread_mails > 0 %}({{ user.count_unread_mails }}) {% endif %}我的消息{% endblock %}
 {% block header %}我的消息{% endblock %}
 {% block content %}
-{# todo: 消息和通知的区别, 参考Twitter #}
-
+<ul class="list-group">
+  {% for m in messages %}
+      <li class="list-group-item">{{ m.content }}</li>
+  {% empty %}
+    <li class="list-group-item center">暂无消息</li>
+  {% endfor %}
+</ul>
 
 {% endblock %}

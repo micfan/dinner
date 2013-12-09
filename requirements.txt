@@ -4,7 +4,7 @@
 #
 #     pip install -r requirements.txt
 
-django==1.8
+django==1.9.1
 Jinja2
 django-pipeline
 multimethods

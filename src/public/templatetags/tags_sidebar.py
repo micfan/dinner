@@ -14,4 +14,4 @@ register = template.Library()
 def active_sidebar_by_path(context, path):
     """高亮当前sidebar-item"""
     curr_path = context['request'].path
-    return ' active ' if path in curr_path else ' '
+    return 'active' if path in curr_path else ''

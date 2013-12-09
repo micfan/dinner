@@ -4,11 +4,9 @@
   "dependencies": {
     "bootstrap": "~3.0.3",
     "jquery": "*",
-    "vue": "*",
     "requirejs": "*",
     "underscore": "*",
     "jquery.easyui": "*",
-    "react": "~0.13.3"
   },
   "devDependencies": {}
 }

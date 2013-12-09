@@ -125,17 +125,17 @@ class User(AbstractBaseUser, PermissionsMixin):
         # Simplest possible answer: All admins are staff
         return self.is_admin
 
-    def get_unread_mails(self):
+    def get_unread_messages(self):
         """未读邮件"""
         try:
             # todo: 缓存
-            return Mail.objects.filter(to_user=self, been_read=False, is_spam=False, trashed=False)
+            return Message.objects.filter(to=self, unread=True, is_spam=False, trashed=False)
         except Exception, e:
             # todo: 记录Django日志
             return None
 
     def has_unread_mails(self):
-        return self.get_unread_mails() is not None
+        return self.get_unread_messages() is not None
 
     def count_unread_mails(self):
         """未读邮件数量"""
@@ -173,6 +173,21 @@ class Conf(models.Model):
 
     def __unicode__(self):
         return self.name
+
+class Message(models.Model):
+    """消息"""
+    come = models.ForeignKey(User, related_name='+')
+    to = models.ForeignKey(User, related_name='+')
+    reply = models.ForeignKey('self', null=True)
+    content = models.TextField('内容', max_length=5000)
+    unread = models.BooleanField('未读', default=True)
+    is_spam= models.BooleanField('垃圾', default=False)
+    trashed = models.BooleanField('回收站', default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return self.content
+
 
 # todo: websocket online chat
 # todo: gevent libs researching
