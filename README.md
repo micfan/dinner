@@ -42,4 +42,8 @@ Refference
 [How jQeury works?](http://learn.jquery.com/about-jquery/how-jquery-works/)  
 [front goto module](http://blog.segmentfault.com/teambition/1190000000517257)
 [JavaScript 标准参考教程](http://javascript.ruanyifeng.com/)
-[django-pipeline](http://django-pipeline.readthedocs.org/en/latest/)
+
+Installation
+-------------
+[django-pipeline](http://django-pipeline.readthedocs.org/en/latest/)  
+[Yuglify](https://github.com/yui/yuglify/)
