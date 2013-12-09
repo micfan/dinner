@@ -29,10 +29,21 @@ from django.core.urlresolvers import reverse
 
 class LoginView(View):
 
+    def __init__(self):
+        super(LoginView, self).__init__()
+        self.next_url = reverse('dinner:index')
+        self.deadline = 15  # 15:00
+
     def get(self, request, tpl):
         """"""
-        a = {'a': 'ad'}
-        return render(request, tpl, a)
+        if request.user.is_authenticated():
+            return HttpResponseRedirect(self.next_url)
+        else:
+            var = {
+                'deadline': '15:00',
+            }
+
+            return render(request, tpl, var)
         # js = {'status': 1, 'message': 'ok', 'ec': 0}
         # return HttpResponse(content=json.dumps(js), status=200, content_type='application/json')
 
@@ -40,17 +51,15 @@ class LoginView(View):
         user = authenticate(username=request.POST.get('email'), password=request.POST.get('password'))
         if user is not None and user.is_active:
             login(request, user)
-            next_url = reverse('dinner.views.index')
-            return HttpResponseRedirect(next_url)
+            return HttpResponseRedirect(self.next_url)
         else:
             # todo: i18n
             messages.add_message(request, messages.INFO, '无效的用户名或密码。')
             return render(request, tpl)
 
-
+# todo:
 @login_required
 def logout(request):
-    """"""
     js = {'status': 1, 'message': 'ok', 'ec': 0}
     return HttpResponse(content=json.dumps(js), status=200, content_type='application/json')
 
