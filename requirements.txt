@@ -11,3 +11,6 @@ multimethods
 simplejson
 django_compressor
 bootstrap-admin
+
+# Deploy
+gunicorn
