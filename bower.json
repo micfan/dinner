@@ -2,11 +2,10 @@
   "name": "dinner",
   "private": true,
   "dependencies": {
-    "bootstrap": "~3.0.3",
+    "bootstrap": "3.3.6",
     "jquery": "*",
     "requirejs": "*",
     "underscore": "*",
-    "jquery.easyui": "*",
-  },
-  "devDependencies": {}
+    "jquery.easyui": "*"
+  }
 }

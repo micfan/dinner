@@ -18,12 +18,6 @@ class Migration(migrations.Migration):
             preserve_default=True,
         ),
         migrations.AlterField(
-            model_name='calendar',
-            name='is_holiday',
-            field=models.BooleanField(default=False, verbose_name=b'\xe6\x98\xaf\xe8\x8a\x82\xe5\x81\x87\xe6\x97\xa5'),
-            preserve_default=True,
-        ),
-        migrations.AlterField(
             model_name='user',
             name='email',
             field=models.EmailField(max_length=255, unique=True, null=True, verbose_name=b'public email'),

@@ -50,17 +50,25 @@ ul {
 }
 
 .navbar {
-    min-height: 28px;
+  min-height: 28px;
 }
 
 .navbar-brand {
   padding: 0 12px;
   font-size: 14px;
+  height: 28px;
   line-height: 28px;
 }
 
-.navbar-nav>li>a {
-    line-height: 28px;
+.navbar-nav > li >a {
+  line-height: 28px;
+
+}
+.navbar-inverse .navbar-nav>.active>a {
+  background: none;
+}
+.navbar-inverse .navbar-nav>.active>a:hover {
+  background: none;
 }
 .nav>li>a {
     display: inline;
@@ -439,5 +447,5 @@ form p > input[type=submit]:hover {
 .std-mr10 {margin-right: 10px;}
 
 /*Profile Page*/
-.profile-avatar { with: 100%; min-width: 210.5px; min-height: 190.4px;}
+.profile-avatar { width: 100%; min-width: 210px; min-height: 190px; }
 

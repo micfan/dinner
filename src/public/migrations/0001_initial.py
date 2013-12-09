@@ -49,7 +49,7 @@ class Migration(migrations.Migration):
                 ('year', models.SmallIntegerField(verbose_name=b'\xe5\xb9\xb4')),
                 ('month', models.SmallIntegerField(verbose_name=b'\xe6\x9c\x88')),
                 ('day', models.SmallIntegerField(verbose_name=b'\xe6\x97\xa5')),
-                ('is_holiday', models.SmallIntegerField(default=0, verbose_name=b'\xe6\x98\xaf\xe8\x8a\x82\xe5\x81\x87\xe6\x97\xa5')),
+                ('is_holiday', models.BooleanField(default=False, verbose_name=b'\xe6\x98\xaf\xe8\x8a\x82\xe5\x81\x87\xe6\x97\xa5')),
                 ('holiday_mark', models.CharField(max_length=50, null=True, verbose_name=b'\xe8\x8a\x82\xe5\x81\x87\xe6\x97\xa5\xe8\xaf\xb4\xe6\x98\x8e')),
             ],
             options={
