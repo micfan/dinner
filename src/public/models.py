@@ -88,6 +88,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     # 离职
     # todo: ->BoolField
     quited = models.IntegerField(null=True, default=0)
+    # 婚否
+    married = models.BooleanField(default=False)
 
     objects = UserManager()
 
