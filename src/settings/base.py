@@ -96,6 +96,8 @@ TEMPLATE_DIRS = (
     os.path.join(PROJECT_DIR, 'templates'),
 )
 
+TEMPLATE_LOADERS = ('src.settings.jinja2_for_django.Loader',)
+
 TEMPLATE_CONTEXT_PROCESSORS += (
 )
 
