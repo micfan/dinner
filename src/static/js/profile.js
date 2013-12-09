@@ -12,4 +12,3 @@ var profile = new Vue({
   }
 });
 
-console.log('fff')

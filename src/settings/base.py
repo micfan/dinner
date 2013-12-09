@@ -125,11 +125,20 @@ TEMPLATE_LOADERS = (
     # )),
 )
 
+# for debug
+INTERNAL_IPS = (
+  '127.0.0.1'
+)
+
 TEMPLATE_CONTEXT_PROCESSORS += (
   'django.core.context_processors.csrf',
   'django.contrib.messages.context_processors.messages',
   'django.core.context_processors.static',
   'django.core.context_processors.request',
+  # todo: update to 1.8
+  # Changed in Django 1.8:
+  # Built-in template context processors were moved from django.core.context_processors to django.template.context_processors in Django 1.8.
+  "django.core.context_processors.debug",
 )
 
 #==============================================================================
