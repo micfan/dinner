@@ -54,9 +54,9 @@ def init_provider():
 
 def init_calendar_provider():
     """初始化每日餐厅配置: 3，4月"""
-    cals = Calendar.objects.filter(year=2015, month__in=(3, 4))
+    cals = Calendar.objects.filter(year=2015, month__in=(3, 4, 5, 6, 7, 8, 9, 10, 11, 12))
     try:
-        provider = Org.objects.get(name='有滋有味(宝山)')
+        provider = Org.objects.get(name='宝升阁')
         for c in cals:
             CalendarProvider.objects.get_or_create(calendar=c, provider=provider)
     except Org.DoesNotExist:
@@ -115,15 +115,15 @@ def init_site():
 
 def main():
     """初始化数据"""
-    init_calendar()
-    init_special_holiday()
-    init_provider()
+    # init_calendar()
+    # init_special_holiday()
+    # init_provider()
     init_calendar_provider()
-    init_bower_static()
-    init_conf()
-    init_org()
-    init_user()
-    init_site()
+    # init_bower_static()
+    # init_conf()
+    # init_org()
+    # init_user()
+    # init_site()
 
 
 

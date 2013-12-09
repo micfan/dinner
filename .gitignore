@@ -4,6 +4,7 @@ src/settings/prod.py
 src/var/dev.db
 src/var/*.csv
 src/deb.db
+*.sql
 
 # cpp compiled
 *.out
