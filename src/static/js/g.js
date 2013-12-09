@@ -5,9 +5,10 @@
 //
 // Distributed under the Boost Software License, Version 1.0. (See accompanying
 // path LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
-//
+// Document:
+//    * https://docs.djangoproject.com/en/dev/ref/contrib/csrf/#django.views.decorators.csrf.csrf_protect
 
-(function() {
+$(function() {
 // using jQuery
 function getCookie(name) {
     var cookieValue = null;
@@ -27,11 +28,6 @@ function getCookie(name) {
 
 window.csrftoken = getCookie('csrftoken');
 
-
-
-
-})(); /// Global annomous function end
-
 function csrfSafeMethod(method) {
     // these HTTP methods do not require CSRF protection
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
@@ -44,3 +40,7 @@ $.ajaxSetup({
         }
     }
 });
+
+
+}); /// Global annomous function end
+
