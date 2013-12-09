@@ -26,7 +26,6 @@ class IndexView(View):
         try:
             deadline_time_str = Conf.objects.get(name='book_end_time')
             _deadline_time = datetime.datetime.strptime(deadline_time_str.content, '%H:%M')
-            print _deadline_time
             self.deadline_datetime = datetime.datetime(year=self.now.year, month=self.now.month, day=self.now.day,
                                                    hour=_deadline_time.hour, minute=_deadline_time.minute)
         except Conf.DoesNotExist:
@@ -157,7 +156,6 @@ class OrderView(View):
                 'curr_cal': self.curr_cal,
                 'order_count': self.order_count
             }
-            print j.dict()
             return render(request, tpl, var)
 
 
