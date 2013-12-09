@@ -29,6 +29,7 @@ INSTALLED_APPS = (
     'public',
     'dinner',
     'apps',
+    'poll',
 
     'django.contrib.auth',
     'django.contrib.contenttypes',
