@@ -21,6 +21,8 @@ Django 静态资源管理利器 - django-pipeline 正是用来解决上述问题
 -----
 http://yeoman.io/ --> Grunt build system, Bower manage javascrpt libs.
 https://github.com/yyuu/pyenv-virtualenvwrapper
-Django Migrate功能的多版本控制
+Django Migrate功能的多版本控制, migrations文件要加入git版本控制吗？
 Django Site多站点?
 重命名仓库为ShgtDaily
+Django admin doc
+多国语言配置
