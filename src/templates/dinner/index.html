@@ -1,5 +1,5 @@
-{% extends "g/base.html" %}
-
+{% extends "base/base.html" %}
+{% load static from staticfiles %}
 {% block body %}
 
 <div class="dinner">
@@ -7,16 +7,16 @@
     请点击您需预订晚餐的日期标蓝即可。
     {% if 1 %}
       <strong>今日晚餐：<a href="http://www.dianping.com/shop/5679823"
-      title="浦东新区 浦电路360号投资大厦裙房2楼103D室" target="_blank">翔记餐厅</a>({% if 1 %}堂吃{% else %}外卖{% end %})</strong>，已预订100人，
+      title="浦东新区 浦电路360号投资大厦裙房2楼103D室" target="_blank">翔记餐厅</a>({% if 1 %}堂吃{% else %}外卖{% endif %})</strong>，已预订100人，
       {距截止时间还有<span class="text-danger">30分</span>|报名已截止}
       <a href="javascript:void(0);">今天我要外带</a>|{Cancel take-away}
     {% else %}
       <strong>今日停灶
-    {% end %}
+    {% endif %}
   </div>
 
   <div class="row">
-    {% for i in range(0,1) %}
+    {% for i in foo %}
     <div class="col-sm-4">
       <div class="panel panel-info">
         <div class="panel-heading">
@@ -32,21 +32,21 @@
             <li>五</li>
             <li>六</li>
           </ul>
-          {% for j in range(0,5) %}
+          {% for j in bar %}
             <ul class="week-cell">
               <li class="holiday">dd</li>
-              <li class="workday available {%if j == 0 %}today{% end %} [[ selected ? 'selected' : '']]" id="test{{ j }}" v-on="click: onClick">1</li>
+              <li class="workday available {%if j == 0 %}today{% endif %} [[ selected ? 'selected' : '']]" id="test{{ j }}" v-on="click: onClick">1</li>
               <li class="workday available">1</li>
               <li class="workday">1</li>
               <li class="workday">1</li>
               <li class="workday">1</li>
               <li class="holiday">dd</li>
             </ul>
-          {% end %}
+          {% endfor %}
         </div>
       </div>
     </div>
-    {% end %}
+    {% endfor %}
   </div>
 
 </div>
@@ -360,11 +360,10 @@
 
     </div>
 
-
-{% end %}
+{% endblock %}
 
 {% block js %}
 
-    <script src="{{ static_url('js/dinner.js') }}"></script>
+    <script src="{% static 'js/dinner.js' %}"></script>
 
-{% end %}
+{% endblock %}

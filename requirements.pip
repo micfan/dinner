@@ -8,3 +8,4 @@ django==1.6.5
 #south==0.7.6
 Jinja2
 django-pipeline
+multimethods
