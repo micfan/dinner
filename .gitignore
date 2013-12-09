@@ -52,3 +52,10 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
+*.pyc
+*.egg-info
+src/settings/local.py
+src/settings/local/*
+docs/_build
+.idea
+src/static/bower/
