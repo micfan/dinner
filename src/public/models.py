@@ -3,6 +3,21 @@ from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 
 
+# todo: Group设置：供应商组，采购商组？
+class Org(models.Model):
+    """组织"""
+    name = models.CharField('名称', max_length=50)
+    code = models.CharField('编码', max_length=50)
+    location = models.CharField('位置', max_length=200, null=True)
+    telephone = models.CharField('手机', max_length=30, null=True)
+    phone = models.CharField('固话', max_length=30, null=True)
+    url = models.URLField('链接地址', null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return self.name
+
+
 class UserManager(BaseUserManager):
     def create_user(self, email, username, telephone, password=None):
         """
@@ -37,6 +52,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+    org = models.ForeignKey(Org, null=True)
     #注意：不继承PermissionsMixin类，是无法实现使用Django Group功能的，本人的项目需要使用所以继承该类。
     email = models.EmailField(verbose_name='email address', max_length=255, null=True, unique=True)
     # 用户登录名
@@ -50,12 +66,21 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     avatar = models.URLField(blank=True)
 
-    telephone = models.CharField(max_length=50)
+    telephone = models.CharField(null=True, max_length=50)
 
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(null=True, auto_now_add=True)
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+
+    qq = models.CharField(null=True, max_length=20)
+    idcard_no = models.CharField(null=True, max_length=50)
+    hired_at = models.DateTimeField(null=True, auto_now_add=True)
+
+    birthday = models.DateField(null=True)
+    gender = models.IntegerField(null=True, default=1)
+    # 离职
+    quited = models.IntegerField(null=True, default=0)
 
     objects = UserManager()
 
@@ -118,20 +143,6 @@ class Conf(models.Model):
     def __unicode__(self):
         return self.name
 
-# todo: Group设置：供应商组，采购商组？
-class Org(models.Model):
-    """组织"""
-    name = models.CharField('名称', max_length=50)
-    code = models.CharField('编码', max_length=50)
-    location = models.CharField('位置', max_length=200, null=True)
-    telephone = models.CharField('手机', max_length=30, null=True)
-    phone = models.CharField('固话', max_length=30, null=True)
-    manager = models.ForeignKey(User, null=True)
-    url = models.URLField('链接地址', null=True)
 
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __unicode__(self):
-        return self.name
 
 

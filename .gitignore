@@ -1,7 +1,14 @@
 src/settings/__init__.py
 
 src/var/dev.db
+src/var/*.csv
 src/deb.db
+
+# cpp compiled
+*.out
+*.o
+
+*.mp3
 
 *.pyc
 *.egg-info

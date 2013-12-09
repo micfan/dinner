@@ -1,11 +1,16 @@
 # coding=utf-8
 # Initial table
 import calendar
-from public.models import Calendar
+
+from django.core.management import BaseCommand
+from django.conf import settings
+from public.models import Calendar, User
 from public.models import Org, Conf
 from dinner.models import CalendarProvider
-from django.core.management import BaseCommand
+
 import subprocess
+import csv
+
 
 
 def init_calendar():
@@ -69,9 +74,25 @@ def init_bower_static():
 def init_org():
     pass
 
-# todo: 从文件初始化用户(username, email, org_code)
+# todo: 从文件初始化用户org
 def init_user():
-    pass
+    user_file = settings.VAR_ROOT + '/user.csv'
+    with open(user_file) as f:
+        reader = csv.DictReader(f, delimiter=',')
+        for r in reader:
+            print r
+            zname = r.get('zname')
+            email = r.get('email')
+
+            _pinyin = email.split('@')
+            username = _pinyin[0] if len(_pinyin) == 2 else None
+
+            gender = r.get('gender')
+            telephone = r.get('mobile')
+            idcard_no = r.get('idcard_no')
+            quited = r.get('quited')
+            User.objects.get_or_create(username=username, cn_name=zname, email=email, gender=gender, telephone=telephone,
+                                       idcard_no=idcard_no, quited=quited)
 
 
 def init_conf():
@@ -90,6 +111,8 @@ def main():
     init_calendar_provider()
     init_bower_static()
     init_conf()
+    init_org()
+    init_user()
 
 
 
