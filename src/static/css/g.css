@@ -74,10 +74,25 @@ ul {
     display: inline;
     padding: 0 12px;
 }
-.nav .message {}
-.nav .message:hover {
-    cursor: pointer;
+.nav .message .unread-count {
+  display: inline-block;
+  line-height: 28px;
+  width: 40px;
+  padding-left: 7px;
 }
+.nav .message .unread-count span {
+  background-color: #33a030;
+  display: inline-block;
+  margin-top: 9px;
+  color: #fff;
+  text-indent: 0;
+  border-radius: 2px;
+  padding: 1px 6px 1px 6px;
+  font-size: 11px;
+  line-height: 11px;
+}
+.nav .message .unread-count:hover { background-color: #333; }
+
 
 /*.navbar-fixed-top {*/
   /*max-height: 28px;*/

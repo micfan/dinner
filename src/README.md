@@ -20,6 +20,11 @@ sql > update public_user
   where 1=1
 ```
 
+## Test
+```
+$ python manage.py test
+```
+
 ## Deploy
 ```
 pip install -r requirements.txt
