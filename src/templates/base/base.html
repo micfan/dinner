@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="zh-cn">
   <head>
-    {% module Template("g/meta.html", title=title) %}
+    {% include 'base/meta.html' %}
 
     {% block css %}
-    {% end %}
+    {% endblock %}
 
   </head>
   <body style="">
@@ -12,14 +12,14 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <div class="container">
-      {% include "nav.html" %}
+      {% include "base/nav.html" %}
 
       {% block body %}
-      {% end %}
+      {% endblock %}
 
-      {% include "footer.html" %}
+      {% include "base/footer.html" %}
 
-      {% include "js.html" %}
+      {% include "base/js.html" %}
     </div>
   </body>
 </html>
