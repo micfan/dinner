@@ -421,5 +421,5 @@ form p > input[type=submit]:hover {
 .std-mr10 {margin-right: 10px;}
 
 /*Profile Page*/
-.profile-avatar { with: 100%;}
+.profile-avatar { with: 100%; min-width: 210.5px; min-height: 190.4px;}
 

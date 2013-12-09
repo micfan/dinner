@@ -17,7 +17,7 @@ TIME_ZONE = 'Asia/Shanghai'
 USE_TZ = True
 USE_I18N = True
 USE_L10N = True
-LANGUAGE_CODE = 'zh-cn'
+LANGUAGE_CODE = 'zh-hans'
 LANGUAGES = (
     ('en', 'English'),
 )
