@@ -10,7 +10,8 @@
       <strong>今日晚餐：<a href="{% if curr_provider.url %}{{ curr_provider.url }}{% else %}javascript:void(0);{% endif %}"
       title="{{ curr_provider.location }}" target="_blank">{{ curr_provider.name }}</a></strong>，今日已预订
       <span id="order_count">{{ order_count }}</span>人，
-      晚餐预定截止时间<span class="text-danger">{{ deadline_hour }}:00</span>，当前报名
+      当前时间{{ curr_now|date:'Y-m-d H:i' }}，
+      晚餐预定截止时间<span class="text-danger">{{ deadline_datetime }}:00</span>，当前报名
       <span class="text-danger">{{ deadline_curr_text }}</span>
     {% else %}
 {#      todo: curr_cal.holiday_mark#}
@@ -40,9 +41,10 @@
           {% endfor %}
 
           {% for cal in this_month_cals %}
-              <li class="{% if user.is_authenticated and not cal.is_holiday %}
+              <li class="
+                    {% if user.is_authenticated and not cal.is_holiday %}
                         {% if cal.day > curr_cal.day %}is-changeable
-                        {% elif cal.day == curr_cal.day and curr_now.hour < deadline_hour %}is-changeable
+                        {% elif cal.day == curr_cal.day and curr_now < deadline_datetime %}is-changeable
                         {% endif %}
                     {% endif %}
 
