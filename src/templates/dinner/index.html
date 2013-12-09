@@ -40,8 +40,7 @@
           {% endfor %}
 
           {% for cal in this_month_cals %}
-              <li class="
-                    {% if user.is_authenticated and not cal.is_holiday %}
+              <li class="{% if user.is_authenticated and not cal.is_holiday %}
                         {% if cal.day > curr_cal.day %}is-changeable
                         {% elif cal.day == curr_cal.day and curr_now.hour < deadline_hour %}is-changeable
                         {% endif %}
