@@ -23,3 +23,4 @@ http://yeoman.io/ --> Grunt build system, Bower manage javascrpt libs.
 https://github.com/yyuu/pyenv-virtualenvwrapper
 Django Migrate功能的多版本控制
 Django Site多站点?
+重命名仓库为ShgtDaily

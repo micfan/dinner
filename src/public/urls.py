@@ -6,7 +6,7 @@ from public import views, signup
 
 urlpatterns = patterns('public.views',
     url(r'^$', 'index', {'tpl': 'public/index.html'}),
-
+    # 登出
     url(r'^%s$' % settings.LOGOUT_URL[1:], 'logout'),
 
     # HTML
