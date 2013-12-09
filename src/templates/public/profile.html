@@ -5,7 +5,7 @@
 {% block header %}我的资料{% endblock %}
 {% block content %}
 {#  todo: gravator, 多国语言#}
-  <ul class="box-list">
+  <ul class="box-list col-sm-9">
     <li class="item">
       <label>CnName:</label>
       <span>{{ user.cn_name|default:'' }}</span>
@@ -32,6 +32,15 @@
       <span>{{ user.org.name|default:'' }}</span>
     </li>
   </ul>
+  <div class="col-sm-3 text-center">
+    {% with default_avatar="http://tp3.sinaimg.cn/1773574690/180/5674535515/1" %}
+      <img src="{{ user.avatar|default:'http://img3.douban.com/icon/user_large.jpg' }}"
+        class="profile-avatar">
+      <button type="button" class="btn btn-default btn-linear-gradient-fc" id="upload-new-avatar">
+        Upload new picture
+      </button>
+    {% endwith %}
+  </div>
 
 
 
