@@ -4,9 +4,6 @@
 
 window.mic = window.mic || {};
 
-function reportException() {
-
-}
 
 function reportFEError(message, url, line) {
   if (!window.mic.DEBUG) {
@@ -14,7 +11,7 @@ function reportFEError(message, url, line) {
     var qs = ['?message=', message, '&url=', url, '&line=', line].join('');
     img.src = window.mic.url.FEExceptionReport + qs;
   } else if (typeof window.console === 'object') {
-    window.console.error(exception);
+    window.console.error(message, url, line);
   }
 }
 

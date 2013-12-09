@@ -5,17 +5,26 @@
 {% block header %}我的资料{% endblock %}
 {% block content %}
 {#  todo: gravator, 多国语言#}
-
-
   <ul>
-    <li>
-      <label>Username:</label><span>{{ user.username }}</span>
+    <li class="col-md-12">
+      <label class="col-md-2">Username:</label>
+      <span class="col-md-9">{{ user.username }}</span>
     </li>
     <li>
-      <label>Email:</label><input value="{{ user.email|default:'' }}" type="email">
+      <label>Email:</label>
+      <span>{{ user.email|default:'' }}</span>
     </li>
     <li>
-      <label>Telephone:</label><input value="{{ user.telephone|default:'' }}" type="text">
+      <label>姓名:</label>
+      <span>{{ user.telephone|default:'' }}</span>
+    </li>
+    <li>
+      <label>身份证号:</label>
+      <span>{{ user.idcard_no|default:'' }}</span>
+    </li>
+    <li>
+      <label>Telephone:</label>
+      <span>{{ user.telephone|default:'' }}</span>
     </li>
   </ul>
 
