@@ -6,3 +6,4 @@
 
 django==1.4.1
 #south==0.7.6
+Jinja2
