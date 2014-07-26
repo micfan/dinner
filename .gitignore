@@ -5,3 +5,4 @@ src/settings/local/*
 docs/_build
 .idea
 src/static/bower/
+src/var/static/

@@ -1,4 +1,4 @@
-
+{% load static from staticfiles %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +9,8 @@
     <title>{{ title }}</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{{ STATIC_URL }}bower/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{ STATIC_URL }}css/g.css" rel="stylesheet">
+    <link href="{% static 'bower/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/g.css' %}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <!-- <link href="jumbotron.css" rel="stylesheet"> -->
