@@ -18,6 +18,8 @@ To bootstrap the project::
 
 Documentation
 -------------
+super username@dev.db: root
+password: root
 
 Developer documentation is available in Sphinx format in the docs directory.
 

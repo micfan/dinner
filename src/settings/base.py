@@ -9,6 +9,8 @@ from django.conf.global_settings import *   # pylint: disable=W0614,W0401
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+
+
 SITE_ID = 1
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -105,7 +107,10 @@ TEMPLATE_DIRS = (
     os.path.join(PROJECT_DIR, 'templates'),
 )
 
-TEMPLATE_LOADERS = ('src.settings.jinja2_for_django.Loader',)
+TEMPLATE_LOADERS = (
+    'src.settings.jinja2_for_django.Loader',
+    'django.template.loaders.app_directories.Loader',
+)
 
 TEMPLATE_CONTEXT_PROCESSORS += (
 )
