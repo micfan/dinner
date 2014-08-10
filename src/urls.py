@@ -11,6 +11,7 @@ urlpatterns = patterns('',
   (r'^admin/doc/', include('django.contrib.admindocs.urls')),
   (r'^admin/', include(admin.site.urls)),
   (r'', include('src.apps.public.urls')),
+  (r'^dinner/', include('src.apps.dinner.urls'))
 )
 
 if settings.DEBUG and settings.MEDIA_ROOT:

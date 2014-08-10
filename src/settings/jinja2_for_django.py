@@ -35,6 +35,7 @@ class Template(jinja2.Template):
             context_dict.update(d)
         return super(Template, self).render(context_dict)
 
+
 from src.settings.base import TEMPLATE_DIRS
 class Loader(filesystem.Loader):
     is_usable = True
@@ -49,7 +50,6 @@ class Loader(filesystem.Loader):
 
 def load_template(self, template_name, template_dirs=None):
         try:
-
             source, origin = self.load_template_source(template_name, template_dirs)
             template = Template(source)
         except jinja2.TemplateNotFound:
