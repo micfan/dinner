@@ -107,10 +107,17 @@ TEMPLATE_DIRS = (
     os.path.join(PROJECT_DIR, 'templates'),
 )
 
+# TEMPLATE_LOADERS = (
+#     # 'jinja2loader.Loader', 
+#     'src.settings.jinja2_for_django.Loader',
+#     'django.template.loaders.app_directories.Loader',
+# )
+
 TEMPLATE_LOADERS = (
-    # 'jinja2loader.Loader', 
-    'src.settings.jinja2_for_django.Loader',
-    # 'django.template.loaders.app_directories.Loader',
+    ('django.template.loaders.cached.Loader', (
+        'django.template.loaders.filesystem.Loader',
+        'django.template.loaders.app_directories.Loader',
+    )),
 )
 
 # JINJA2_DJANGO_FILTER_LIBRARIES = (
@@ -125,6 +132,7 @@ TEMPLATE_CONTEXT_PROCESSORS += (
 #==============================================================================
 
 MIDDLEWARE_CLASSES += (
+    'django.middleware.csrf.CsrfViewMiddleware',
 )
 
 #==============================================================================
