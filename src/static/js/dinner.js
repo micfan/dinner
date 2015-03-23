@@ -2,14 +2,14 @@
 // ~~~~~~~~~
 // Micheal Fan, 2014-05-15
 
-;
+$(function() {
+
+
 // 配置Vue变量标签
-Vue.config(
-  { delimiters: ["[", "]"] }
-);
+Vue.config.delimiters = ["[", "]"];
 
 Vue.directive('disable', function (value) {
-    this.el.disabled = !!value
+    this.el.disabled = !!value;
 });
 var domain = 'http://localhost:8000';
 /*
@@ -47,3 +47,5 @@ var test = new Vue({
     }
 });
 
+
+});
