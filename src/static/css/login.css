@@ -38,3 +38,12 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+.messages {
+      margin: 10px 0;
+  text-align: center;
+}
+.messages .info {
+  color: #fff;
+  background-color: #ed9c28;
+  border-color: #d58512;
+}

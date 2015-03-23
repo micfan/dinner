@@ -57,11 +57,20 @@ class LoginView(View):
             messages.add_message(request, messages.INFO, '无效的用户名或密码。')
             return render(request, tpl)
 
-# todo:
+from django.contrib.auth.views import logout as django_logout
+# todo: 用class based view实现吧
 @login_required
 def logout(request):
-    js = {'status': 1, 'message': 'ok', 'ec': 0}
-    return HttpResponse(content=json.dumps(js), status=200, content_type='application/json')
+
+    if request.method == 'GET':
+        next_page = request.GET.get('next')
+        if not next_page:
+            next_page = '/'
+        # todo: 登出用户
+        return django_logout(request, next_page)
+    if request.method == 'POST':
+        js = {'status': 1, 'message': 'ok', 'ec': 0}
+        return HttpResponse(content=json.dumps(js), status=200, content_type='application/json')
 
 
 def html(request, tpl_prefix):
