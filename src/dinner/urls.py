@@ -1,9 +1,9 @@
 from django.conf.urls import patterns, url, include
 
-urlpatterns = patterns('src.apps.dinner.views',
+urlpatterns = patterns('dinner.views',
   url(r'^$', 'index', {'tpl': 'dinner/index.html'}),
 )
 
-urlpatterns += patterns('src.apps.dinner.apis', 
+urlpatterns += patterns('dinner.apis',
   url(r'book$', 'book'),
 )

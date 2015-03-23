@@ -1,13 +1,20 @@
-{% extends "g/base.html" %}
-
+{% extends "base/base.html" %}
+{% load static from staticfiles %}
 {% block css %}
-  <link href="{{ static_url('css/login.css') }}" rel="stylesheet">
-{% end %}
+  <link href="{% static 'css/login.css' %}" rel="stylesheet">
+{% endblock%}
 
 {% block body %}
    <!--<div class="container">-->
-      <form class="form-signin" role="form" action="/login" method="post">
-        {% module xsrf_form_html() %}
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+      <form class="form-signin" role="form" action="/login/" method="post">
+        {% csrf_token %}
         <h2 class="form-signin-heading">Please sign in</h2>
         <input type="text" class="form-control" placeholder="Email address" required="" autofocus="" name="email">
         <input type="password" class="form-control" placeholder="Password" required="" name="password">
@@ -16,7 +23,9 @@
         </label>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
       </form>
+
+
    <!--</div>-->
-{% end %}
+{% endblock %}
 
 
