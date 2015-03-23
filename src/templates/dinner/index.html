@@ -5,13 +5,14 @@
 <div class="dinner">
   <div class="alert alert-info">
     请点击您需预订晚餐的日期标蓝即可。
-    {% if 1 %}
-      <strong>今日晚餐：<a href="http://www.dianping.com/shop/5679823"
-      title="浦东新区 浦电路360号投资大厦裙房2楼103D室" target="_blank">翔记餐厅</a>({% if 1 %}堂吃{% else %}外卖{% endif %})</strong>，已预订100人，
-      {距截止时间还有<span class="text-danger">30分</span>|报名已截止}
-      <a href="javascript:void(0);">今天我要外带</a>|{Cancel take-away}
+    {% if not curr_cal.is_holiday %}
+      <strong>今日晚餐：<a href="{{ curr_provider.url }}"
+      title="{{ curr_provider.location }}" target="_blank">{{ curr_provider.name }}</a></strong>，已预订{{ order_count }}人，
+      晚餐预定截止时间<span class="text-danger">{{ deadline }}:00</span>，当前报名
+      <span class="text-danger">{{ deadline_curr_text }}</span>
     {% else %}
-      <strong>今日停灶
+{#      todo: curr_cal.holiday_mark#}
+      <strong>今日无晚餐
     {% endif %}
   </div>
 

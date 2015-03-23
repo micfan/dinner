@@ -1,8 +1,33 @@
-{% extends "base/base.html" %}
+{% load static from staticfiles %}
+<!doctype html>
+<html lang="zh-cn">
+  <head>
+    {% include 'base/meta.html' %}
 
-{% block body %}
-  <div class="well">
-    <p>《汉书·郦食其传》：“王者以民为天，而民以食为天。”</p>
-  </div>
+    {% block css %}
+    {% endblock %}
+
+  </head>
+  <body style="">
+    {% csrf_token %}
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="container">
+      {% include "base/nav.html" %}
+
+      {% block body %}
+        <div class="well">
+            <p>买买买</p>
+        </div>
         <h4 class="center"> </h4>
-{% endblock %}
+      {% endblock %}
+
+      {% include "base/footer.html" %}
+
+      {% include "base/js.html" %}
+      {% block js %}
+      {% endblock %}
+    </div>
+  </body>
+</html>

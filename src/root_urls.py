@@ -7,7 +7,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
   (r'', include('public.urls')),
-  (r'^dinner/', include('dinner.urls')),
+  (r'^dinner/', include('dinner.urls', namespace='dinner', app_name='dinner')),
 
   (r'^admin/doc/', include('django.contrib.admindocs.urls')),
   (r'^admin/', include(admin.site.urls)),

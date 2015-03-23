@@ -89,3 +89,14 @@ class User(AbstractBaseUser, PermissionsMixin):
         """Is the user a member of staff?"""
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+
+class Calender(models.Model):
+    """日历"""
+    year = models.SmallIntegerField('年')
+    month = models.SmallIntegerField('月')
+    day = models.SmallIntegerField('日')
+    # 1=是节假日
+    is_holiday = models.SmallIntegerField('是节假日', default=0)
+    holiday_mark = models.CharField('节假日说明', max_length=50)
+
