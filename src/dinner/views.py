@@ -15,7 +15,6 @@ from misc.views import JsonResult
 
 class IndexView(View):
     """晚餐预定"""
-
     def __init__(self):
         super(IndexView, self).__init__()
         self.now = datetime.datetime.now()
@@ -25,7 +24,6 @@ class IndexView(View):
         if Calendars.count() == 1:
             self.curr_cal = Calendars[0]
             cp = CalendarProvider.objects.filter(calendar=self.curr_cal)
-
             if cp.count() == 1:
                 self.curr_provider = cp[0].provider
             else:
@@ -39,16 +37,19 @@ class IndexView(View):
     # todo: 类内修饰器
     # @login_required
     def get(self, request, tpl):
+        this_month_cals = Calendar.objects.filter(year=2015, month=self.now.month)
+        if not this_month_cals.exists():
+            raise Exception('日历配置错误')
         var = {
-            'foo': range(0, 3),
-            'bar': range(0, 5),
-            'order_count': 0,
+            'col': range(0, 1),
+            'row': range(0, 5),
+            'order_count': Order.objects.filter(calendar__id=self.curr_cal.id).count(),
             'curr_cal': self.curr_cal,
             'deadline': self.deadline,
             'deadline_curr_text': self.deadline_curr_text,
-            'curr_provider': self.curr_provider
+            'curr_provider': self.curr_provider,
+            'this_month_cals': this_month_cals
         }
-
         if self.curr_cal:
             o = Order.objects.filter(calendar=self.curr_cal).annotate(Count('user_id'))
             var['order_count'] = o[0].user_id__count if o.count() == 1 else 0
@@ -56,14 +57,28 @@ class IndexView(View):
         return render(request, tpl, var)
 
     # todo: 修饰器
+    # todo: 扩充接口参数改为y, m, d
     def post(self, request, tpl):
         cal_id = request.POST.get('cal_id')
-        j = JsonResult(message='预定成功')
-        try:
-            cal = Calendar.objects.get(id=cal_id)
-            # Order.objects.get_or_create(calendar=cal, user=request.user)
-            j.error(3)
-        except Calendar.DoesNotExist:
+        selected = request.POST.get('selected')
+        j = JsonResult(message='预定成功', data=0)
+        if not request.user.is_authenticated():
+            return HttpResponse(j.error(4).json(), 'application/json')
+        if cal_id and selected:
+            try:
+                unselected = (int(selected) == 0)
+                if unselected:
+                    Order.objects.filter(calendar__id=cal_id, user=request.user).delete()
+                    j.message = '该日晚餐预定已取消'
+                else:
+                    # todo: 参数合法性检查, 如：是否假日、是过去日前点: def is_avilable_calendar(y, m, d, cal_id=0);
+                    cal = Calendar.objects.get(id=cal_id, is_holiday=False)
+                    order, created = Order.objects.get_or_create(calendar=cal, user=request.user)
+                    # 今日已预定数量
+                    j.data = Order.objects.filter(calendar__id=self.curr_cal.id).count()
+            except Calendar.DoesNotExist:
+                j.error(3)
+        else:
             j.error(3)
         return HttpResponse(j.json(), 'application/json')
 

@@ -8,21 +8,22 @@
     请点击您需预订晚餐的日期标蓝即可。
     {% if not curr_cal.is_holiday %}
       <strong>今日晚餐：<a href="{% if curr_provider.url %}{{ curr_provider.url }}{% else %}javascript:void(0);{% endif %}"
-      title="{{ curr_provider.location }}" target="_blank">{{ curr_provider.name }}</a></strong>，已预订{{ order_count }}人，
+      title="{{ curr_provider.location }}" target="_blank">{{ curr_provider.name }}</a></strong>，已预订
+      <span id="order_count">{{ order_count }}</span>人，
       晚餐预定截止时间<span class="text-danger">{{ deadline }}:00</span>，当前报名
       <span class="text-danger">{{ deadline_curr_text }}</span>
     {% else %}
 {#      todo: curr_cal.holiday_mark#}
-      <strong>今日不订晚餐
+      <strong>今日{{ curr_cal.holiday_mark }}，不订晚餐
     {% endif %}
   </div>
 
   <div class="row">
-    {% for i in foo %}
+    {% for i in col %}
     <div class="col-sm-4">
       <div class="panel panel-info">
         <div class="panel-heading">
-          <h3 class="panel-title center">2014年6月</h3>
+          <h3 class="panel-title center">{{ curr_cal.id }}{{ curr_cal.year|default:2015 }}年{{ curr_cal.month }}月</h3>
         </div>
         <div class="panel-body">
           <ul class="week-bar">
@@ -34,7 +35,7 @@
             <li>五</li>
             <li>六</li>
           </ul>
-          {% for j in bar %}
+          {% for j in row %}
             <ul class="week-cell">
               <li class="holiday">dd</li>
               <li class="workday available {%if j == 0 %}today{% endif %} [[ selected ? 'selected' : '']]" id="test{{ j }}" v-on="click: onClick">1</li>
