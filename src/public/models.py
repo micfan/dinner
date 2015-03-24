@@ -91,7 +91,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.is_admin
 
 
-class Calender(models.Model):
+class Calendar(models.Model):
     """日历"""
     year = models.SmallIntegerField('年')
     month = models.SmallIntegerField('月')

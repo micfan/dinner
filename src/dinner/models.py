@@ -2,18 +2,17 @@
 
 from django.db import models
 from public.models import User
-from public.models import Calender
+from public.models import Calendar
 
 
 class Provider(models.Model):
     """供应商"""
     name = models.CharField(max_length=50)
-    # code = models.CharField('代码', max_length=30)
-    location = models.CharField('位置', max_length=200)
-    telephone = models.CharField('手机', max_length=30)
-    phone = models.CharField('固话', max_length=30)
+    location = models.CharField('位置', max_length=200, null=True)
+    telephone = models.CharField('手机', max_length=30, null=True)
+    phone = models.CharField('固话', max_length=30, null=True)
     manager = models.ForeignKey(User, null=True)
-    url = models.URLField('链接地址', default='javascript:void(0);')
+    url = models.URLField('链接地址', null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -41,7 +40,7 @@ class MenuItem(models.Model):
 # todo: 暂支持是否报名晚餐
 class Order(models.Model):
     """晚餐报名表"""
-    calender = models.ForeignKey(Calender)
+    calendar = models.ForeignKey(Calendar)
     user = models.ForeignKey(User)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -49,14 +48,14 @@ class Order(models.Model):
 # todo: 将来支持点条目,以Top10为最终结果
 class OrderItem(models.Model):
     """某日某人订某菜表"""
-    calender = models.ForeignKey(Calender)
+    calendar = models.ForeignKey(Calendar)
     user = models.ForeignKey(User)
     # order = models.ForeignKey(Order)
     item = models.ForeignKey(MenuItem)
     created_at = models.DateTimeField(auto_now_add=True)
 
 
-class CalenderProvider(models.Model):
+class CalendarProvider(models.Model):
     """餐厅配置"""
-    calender = models.ForeignKey(Calender)
+    calendar = models.ForeignKey(Calendar)
     provider = models.ForeignKey(Provider)

@@ -1,33 +1,8 @@
-{% load static from staticfiles %}
-<!doctype html>
-<html lang="zh-cn">
-  <head>
-    {% include 'base/meta.html' %}
+{% extends "base/base.html" %}
 
-    {% block css %}
-    {% endblock %}
-
-  </head>
-  <body style="">
-    {% csrf_token %}
-    <!--[if lt IE 10]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-    <div class="container">
-      {% include "base/nav.html" %}
-
-      {% block body %}
-        <div class="well">
-            <p style="height: 450px; text-align: center;">买买买</p>
-        </div>
-        <h4 class="center"> </h4>
-      {% endblock %}
-
-      {% include "base/footer.html" %}
-
-      {% include "base/js.html" %}
-      {% block js %}
-      {% endblock %}
-    </div>
-  </body>
-</html>
+{% block body %}
+  <div class="well">
+      <h4 style="height: 450px; text-align: center;">日常@水产路</h4>
+  </div>
+  <h4 class="center"> </h4>
+{% endblock %}

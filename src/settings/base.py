@@ -18,7 +18,7 @@ TIME_ZONE = 'Asia/Shanghai'
 USE_TZ = True
 USE_I18N = True
 USE_L10N = True
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'zh-cn'
 LANGUAGES = (
     ('en', 'English'),
 )
@@ -123,6 +123,8 @@ TEMPLATE_LOADERS = (
 TEMPLATE_CONTEXT_PROCESSORS += (
   'django.core.context_processors.csrf',
   'django.contrib.messages.context_processors.messages',
+  'django.core.context_processors.static',
+  'django.core.context_processors.request',
 )
 
 #==============================================================================

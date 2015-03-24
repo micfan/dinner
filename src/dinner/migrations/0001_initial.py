@@ -2,22 +2,18 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-from django.conf import settings
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('public', '0002_calender'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='CalenderProvider',
+            name='CalendarProvider',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('calender', models.ForeignKey(to='public.Calender')),
             ],
             options={
             },
@@ -44,8 +40,6 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('calender', models.ForeignKey(to='public.Calender')),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
             options={
             },
@@ -56,9 +50,6 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('calender', models.ForeignKey(to='public.Calender')),
-                ('item', models.ForeignKey(to='dinner.MenuItem')),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
             options={
             },
@@ -72,24 +63,11 @@ class Migration(migrations.Migration):
                 ('location', models.CharField(max_length=200, verbose_name=b'\xe4\xbd\x8d\xe7\xbd\xae')),
                 ('telephone', models.CharField(max_length=30, verbose_name=b'\xe6\x89\x8b\xe6\x9c\xba')),
                 ('phone', models.CharField(max_length=30, verbose_name=b'\xe5\x9b\xba\xe8\xaf\x9d')),
-                ('url', models.URLField(verbose_name=b'\xe9\x93\xbe\xe6\x8e\xa5\xe5\x9c\xb0\xe5\x9d\x80')),
+                ('url', models.URLField(default=b'javascript:void(0);', verbose_name=b'\xe9\x93\xbe\xe6\x8e\xa5\xe5\x9c\xb0\xe5\x9d\x80')),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('manager', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
             options={
             },
             bases=(models.Model,),
-        ),
-        migrations.AddField(
-            model_name='menuitem',
-            name='provider',
-            field=models.ForeignKey(verbose_name=b'\xe4\xbe\x9b\xe5\xba\x94\xe5\x95\x86', to='dinner.Provider'),
-            preserve_default=True,
-        ),
-        migrations.AddField(
-            model_name='calenderprovider',
-            name='provider',
-            field=models.ForeignKey(to='dinner.Provider'),
-            preserve_default=True,
         ),
     ]
