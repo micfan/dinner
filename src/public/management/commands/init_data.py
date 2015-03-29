@@ -1,6 +1,6 @@
 # coding=utf-8
 # Initial table
-
+import calendar
 from public.models import Calendar
 from dinner.models import Provider, CalendarProvider
 from django.core.management import BaseCommand
@@ -9,20 +9,20 @@ from django.core.management import BaseCommand
 def init_calendar():
     """初始化日历"""
     year, month = 2015, 12
-    # 31天
-    big_month = (1, 3, 5, 7, 8, 10, 12)
-    Feb = 2
-    for m in xrange(1, month+1):
-        if m == Feb:
-            day = 29
-        elif m in big_month:
-            day = 32
-        else:
-            day = 31
 
-        for d in xrange(1, day):
-            # todo: 如何判断星期几？第几周？
-            Calendar.objects.get_or_create(year=year, month=m, day=d)
+    for m in range(1, month+1):
+        c = calendar.monthcalendar(year, m)
+        for week in c:
+            for i, day in enumerate(week):
+                # 也可用date模块计算
+                if day != 0:
+                    is_holiday = i in (5, 6)
+                    if is_holiday:
+                        holiday_mark = u'周末'
+                    else:
+                        holiday_mark = None
+                    Calendar.objects.get_or_create(year=year, month=m, day=day, is_holiday=is_holiday,
+                                                   holiday_mark=holiday_mark)
 
 
 def init_provider():

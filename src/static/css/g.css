@@ -81,8 +81,8 @@ ul {
   /*background-color: #eee; #f5f5f5; #dff0d8;*/
 }
 
-.dinner .panel-body .week-cell li.available:hover {
-  background-color: #eee; #f5f5f5; /*#dff0d8;*/
+.dinner .panel-body .week-cell li.is-changeable:hover {
+  background-color: #eee;  /*#f5f5f5; #dff0d8;*/
   cursor: pointer;
 }
 
@@ -102,6 +102,6 @@ ul {
     box-shadow:0 0 12px #ed9c28;
     -moz-box-shadow:0 0 12px #ed9c28;
     -webkit-box-shadow:0 0 12px #ed9c28;
-    background-color: #fb0 !important;
+    /*background-color: #fb0 !important;*/
 }
 

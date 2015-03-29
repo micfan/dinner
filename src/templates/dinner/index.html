@@ -4,13 +4,13 @@
 {% block body %}
 
 <div class="dinner">
-  <div class="alert alert-info">
+  <div class="alert alert-info">{{ now }}
     请点击您需预订晚餐的日期标蓝即可。
     {% if not curr_cal.is_holiday %}
       <strong>今日晚餐：<a href="{% if curr_provider.url %}{{ curr_provider.url }}{% else %}javascript:void(0);{% endif %}"
-      title="{{ curr_provider.location }}" target="_blank">{{ curr_provider.name }}</a></strong>，已预订
+      title="{{ curr_provider.location }}" target="_blank">{{ curr_provider.name }}</a></strong>，今日已预订
       <span id="order_count">{{ order_count }}</span>人，
-      晚餐预定截止时间<span class="text-danger">{{ deadline }}:00</span>，当前报名
+      晚餐预定截止时间<span class="text-danger">{{ deadline_hour }}:00</span>，当前报名
       <span class="text-danger">{{ deadline_curr_text }}</span>
     {% else %}
 {#      todo: curr_cal.holiday_mark#}
@@ -37,17 +37,19 @@
           <ul class="week-cell">
           {% for cal in frirst_week_place_holder %}
               <li class=""></li>
-
           {% endfor %}
+
           {% for cal in this_month_cals %}
               <li class="
-                 {% if not cal.is_holidy %}workday available
+                 {% if not cal.is_holidy %}workday
+                    {% if cal.day > curr_cal.day %}is-changeable
+                    {% elif cal.day == curr_cal.day and curr_now.hour < deadline_hour %}is-changeable
+                    {% endif %}
                  {% endif %}
                  {% if cal.has_booked %}has_booked
                  {% endif %}
                  {%if cal.id == curr_cal.id %}today
                  {% endif %}" cal-id="{{ cal.id }}
-
                  ">{{ cal.day }}</li>
 
           {% endfor %}

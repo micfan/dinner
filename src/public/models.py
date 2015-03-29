@@ -100,3 +100,12 @@ class Calendar(models.Model):
     is_holiday = models.SmallIntegerField('是节假日', default=0)
     holiday_mark = models.CharField('节假日说明', max_length=50)
 
+
+class Conf(models.Model):
+    """配置"""
+    name = models.CharField('名称', max_length=50)
+    desc = models.CharField('配置说明', max_length=50)
+    content = models.CharField('配置说明', max_length=50)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+

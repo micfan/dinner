@@ -25,13 +25,15 @@ $(function () {
       if (response.ec === 0) {
         $el.toggleClass('has_booked');
         $('#order_count').html(response.data);
+      } else {
+        // todo: page.error(response.message)
       }
     });
   }
 
   (function main() {
 
-    $('.workday').on('click', function() {
+    $('.is-changeable').on('click', function() {
       toggleBookStatus($(this));
     });
 
