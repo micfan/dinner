@@ -42,8 +42,10 @@
           {% for cal in this_month_cals %}
               <li class="
                  {% if not cal.is_holidy %}workday
-                    {% if cal.day > curr_cal.day %}is-changeable
-                    {% elif cal.day == curr_cal.day and curr_now.hour < deadline_hour %}is-changeable
+                    {% if user.is_authenticated %}
+                        {% if cal.day > curr_cal.day %}is-changeable
+                        {% elif cal.day == curr_cal.day and curr_now.hour < deadline_hour %}is-changeable
+                        {% endif %}
                     {% endif %}
                  {% endif %}
                  {% if cal.has_booked %}has_booked

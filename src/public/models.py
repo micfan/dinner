@@ -38,15 +38,15 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     #注意：不继承PermissionsMixin类，是无法实现使用Django Group功能的，本人的项目需要使用所以继承该类。
-    email = models.EmailField(verbose_name='email address', max_length=255, unique=True)
+    email = models.EmailField(verbose_name='email address', max_length=255, null=True, unique=True)
     # 用户登录名
     username = models.CharField(max_length=100, unique=True, db_index=True)
     # 英文名
-    first_name = models.CharField(max_length=100, unique=True, db_index=True)
+    first_name = models.CharField(max_length=100, db_index=True)
     # 英文姓
-    last_name = models.CharField(max_length=100, unique=True, db_index=True)
+    last_name = models.CharField(max_length=100, null=True, db_index=True)
     # 中文姓名
-    cn_name = models.CharField(max_length=100, unique=True, db_index=True)
+    cn_name = models.CharField(max_length=100, unique=True, null=True, db_index=True)
 
     avatar = models.URLField(blank=True)
 
@@ -58,9 +58,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_admin = models.BooleanField(default=False)
 
     objects = UserManager()
-    # !!!
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = []
 
     def get_full_name(self):
         # The user is identified by their email address

@@ -1,18 +1,20 @@
 #! /usr/bin/python
 # coding=utf-8
-from django.shortcuts import render
+
 from multimethods import multimethod as mm
 try:
     import simplejson as json
 except ImportError:
     import json
+from django.shortcuts import render
 from misc.error import error_code
 
 
 class JsonResult(object):
     """Http JSON helper"""
     def __init__(self, message='', data=[], ec=0):
-        self.ec = ec # system error code, 0=no error, 9999=unknown error, others defined in error.py
+        # 系统错误代码字典, 0=no error, 9999=unknown error, others defined in error.py
+        self.ec = ec
         self.message = message
         self.data = data
 
