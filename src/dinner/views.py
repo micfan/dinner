@@ -1,6 +1,7 @@
 # coding=utf-8
 
 import datetime
+import calendar
 
 from django.shortcuts import render
 from django.views.generic import View
@@ -37,18 +38,28 @@ class IndexView(View):
     # todo: 类内修饰器
     # @login_required
     def get(self, request, tpl):
-        this_month_cals = Calendar.objects.filter(year=2015, month=self.now.month)
+        this_month_cals = Calendar.objects.filter(year=2015, month=self.now.month).extra(
+          select={
+              'has_booked': "select count(*) from dinner_order \
+                            where dinner_order.calendar_id = public_calendar.id \
+                            and dinner_order.user_id = 1"
+          }
+        )
         if not this_month_cals.exists():
             raise Exception('日历配置错误')
+        # 计算空缺
+        c = calendar.monthcalendar(self.now.year, self.now.month)
+        first_week, last_week = c[0], c[len(c)-1]
+        frirst_week_place_holder = 7 - len(set(first_week) - {0})
+
         var = {
-            'col': range(0, 1),
-            'row': range(0, 5),
             'order_count': Order.objects.filter(calendar__id=self.curr_cal.id).count(),
             'curr_cal': self.curr_cal,
             'deadline': self.deadline,
             'deadline_curr_text': self.deadline_curr_text,
             'curr_provider': self.curr_provider,
-            'this_month_cals': this_month_cals
+            'this_month_cals': this_month_cals,
+            'frirst_week_place_holder': range(frirst_week_place_holder)
         }
         if self.curr_cal:
             o = Order.objects.filter(calendar=self.curr_cal).annotate(Count('user_id'))
@@ -59,15 +70,18 @@ class IndexView(View):
     # todo: 修饰器
     # todo: 扩充接口参数改为y, m, d
     def post(self, request, tpl):
-        cal_id = request.POST.get('cal_id')
-        selected = request.POST.get('selected')
         j = JsonResult(message='预定成功', data=0)
         if not request.user.is_authenticated():
             return HttpResponse(j.error(4).json(), 'application/json')
-        if cal_id and selected:
+
+        cal_id = request.POST.get('cal_id')
+        has_booked = request.POST.get('has_booked')
+
+        if cal_id and has_booked:
             try:
-                unselected = (int(selected) == 0)
-                if unselected:
+                has_booked = (int(has_booked) == 1)
+                # UI显示已预定，则后端取消；反之亦然
+                if has_booked:
                     Order.objects.filter(calendar__id=cal_id, user=request.user).delete()
                     j.message = '该日晚餐预定已取消'
                 else:

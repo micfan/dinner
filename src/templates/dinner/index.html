@@ -19,37 +19,42 @@
   </div>
 
   <div class="row">
-    {% for i in col %}
     <div class="col-sm-4">
       <div class="panel panel-info">
         <div class="panel-heading">
-          <h3 class="panel-title center">{{ curr_cal.id }}{{ curr_cal.year|default:2015 }}年{{ curr_cal.month }}月</h3>
+          <h3 class="panel-title center">{{ curr_cal.year }}年{{ curr_cal.month }}月</h3>
         </div>
         <div class="panel-body">
           <ul class="week-bar">
-            <li >日</li>
             <li>一</li>
             <li>二</li>
             <li>三</li>
             <li>四</li>
             <li>五</li>
-            <li>六</li>
+            <li class="weekend">六</li>
+            <li class="weekend">日</li>
           </ul>
-          {% for j in row %}
-            <ul class="week-cell">
-              <li class="holiday">dd</li>
-              <li class="workday available {%if j == 0 %}today{% endif %} [[ selected ? 'selected' : '']]" id="test{{ j }}" v-on="click: onClick">1</li>
-              <li class="workday available">1</li>
-              <li class="workday">1</li>
-              <li class="workday">1</li>
-              <li class="workday">1</li>
-              <li class="holiday">dd</li>
-            </ul>
+          <ul class="week-cell">
+          {% for cal in frirst_week_place_holder %}
+              <li class=""></li>
+
           {% endfor %}
+          {% for cal in this_month_cals %}
+              <li class="
+                 {% if not cal.is_holidy %}workday available
+                 {% endif %}
+                 {% if cal.has_booked %}has_booked
+                 {% endif %}
+                 {%if cal.id == curr_cal.id %}today
+                 {% endif %}" cal-id="{{ cal.id }}
+
+                 ">{{ cal.day }}</li>
+
+          {% endfor %}
+          </ul>
         </div>
       </div>
     </div>
-    {% endfor %}
   </div>
 
 </div>
