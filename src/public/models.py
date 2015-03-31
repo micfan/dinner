@@ -72,7 +72,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     # On Python 3: def __str__(self):
     def __unicode__(self):
-        return self.email
+        return self.username
 
     def has_perm(self, perm, obj=None):
         """Does the user have a specific permission?"""
@@ -99,6 +99,13 @@ class Calendar(models.Model):
     # 1=是节假日
     is_holiday = models.SmallIntegerField('是节假日', default=0)
     holiday_mark = models.CharField('节假日说明', max_length=50)
+
+    def get_full_datetime(self):
+        # todo: 返回datetime()格式
+        return '%s-%s-%s' % (self.year, self.month, self.day)
+
+    def __unicode__(self):
+        return self.get_full_datetime()
 
 
 class Conf(models.Model):
