@@ -1,5 +1,5 @@
 """Settings for Development Server"""
-from src.settings.base import *   # pylint: disable=W0614,W0401
+from settings.base import *   # pylint: disable=W0614,W0401
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -11,12 +11,11 @@ STATIC_ROOT = os.path.join(VAR_ROOT, 'static')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'src',
-#        'USER': 'dbuser',
-#        'PASSWORD': 'dbpassword',
-        'OPTIONS': {
-            'timeout': 20
-        }
+        'NAME': 'dinner',
+        'USER': 'mic',
+        'PASSWORD': '',
+        'HOST': '127.0.0.1',
+        'PORT': '5432'
     }
 }
 

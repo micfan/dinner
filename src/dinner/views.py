@@ -3,6 +3,7 @@
 import datetime
 import calendar
 import json
+import time
 
 from django.shortcuts import render
 from django.views.generic import View
@@ -11,7 +12,7 @@ from django.db.models import Count
 from django.contrib.auth.decorators import login_required
 
 from dinner.models import Order, CalendarProvider
-from public.models import Calendar
+from public.models import Calendar, Conf
 from misc.views import JsonResult
 
 
@@ -20,9 +21,16 @@ class IndexView(View):
     def __init__(self):
         super(IndexView, self).__init__()
         self.now = datetime.datetime.now()
-        # todo: 加到public.model.Conf中
-        self.deadline_hour = 15  # 15:00 截止
-        self.deadline_curr_text = u'已截止' if self.now.hour >= self.deadline_hour else u'进行中'
+
+        try:
+            deadline_time_str = Conf.objects.get(name='book_end_time')
+            _deadline_time = datetime.datetime.strptime(deadline_time_str.content, '%H:%S')
+            self.deadline_datetime = datetime.datetime(year=self.now.year, month=self.now.month, day=self.now.day,
+                                                   hour=_deadline_time.hour, minute=_deadline_time.minute)
+        except Conf.DoesNotExist:
+            raise Exception('截止时间配置错误')
+
+        self.deadline_curr_text = u'已截止' if self.now >= self.deadline_datetime else u'进行中'
         Calendars = Calendar.objects.filter(year=self.now.year, month=self.now.month, day=self.now.day)
         if Calendars.count() == 1:
             self.curr_cal = Calendars[0]
@@ -60,7 +68,7 @@ class IndexView(View):
             'order_count': Order.objects.filter(calendar__id=self.curr_cal.id).count(),
             'curr_cal': self.curr_cal,
             'curr_now': self.now,
-            'deadline_hour': self.deadline_hour,
+            'deadline_hour': self.deadline_datetime,
             'deadline_curr_text': self.deadline_curr_text,
             'curr_provider': self.curr_provider,
             'this_month_cals': this_month_cals,
@@ -99,7 +107,7 @@ class IndexView(View):
                         return HttpResponse(j.error(3).json(), 'application/json')
 
                     # 今天截止时间
-                    if cal.id == self.curr_cal.id and self.now.hour >= self.deadline_hour:
+                    if cal.id == self.curr_cal.id and self.now.time() >= self.deadline_datetime:
                         return HttpResponse(j.error(5).json(), 'application/json')
 
                     # 不用get_or_create()导致sqlite3 database clocked

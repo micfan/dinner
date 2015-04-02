@@ -44,8 +44,6 @@ class LoginView(View):
             }
 
             return render(request, tpl, var)
-        # js = {'status': 1, 'message': 'ok', 'ec': 0}
-        # return HttpResponse(content=json.dumps(js), status=200, content_type='application/json')
 
     def post(self, request, tpl):
         user = authenticate(username=request.POST.get('email'), password=request.POST.get('password'))

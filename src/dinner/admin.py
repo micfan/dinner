@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from dinner.models import Provider, MenuItem, Order, OrderItem, CalendarProvider
+from dinner.models import MenuItem, Order, OrderItem, CalendarProvider
+
 
 
 class OrderAdmin(admin.ModelAdmin):
@@ -8,7 +9,7 @@ class OrderAdmin(admin.ModelAdmin):
 
 
 
-admin.site.register(Provider)
+
 
 admin.site.register(MenuItem)
 admin.site.register(Order, OrderAdmin)
