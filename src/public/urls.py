@@ -2,12 +2,11 @@
 from django.conf.urls import patterns, url, include
 from django.conf import settings
 
-from public import views, signup
+from public import views, signup, profile
 
 urlpatterns = patterns('public.views',
     url(r'^$', 'index', {'tpl': 'public/index.html'}),
-    # 登出
-    url(r'^%s$' % settings.LOGOUT_URL[1:], 'logout'),
+
 
     # HTML
     url(r'^h/(?P<tpl_prefix>\w*)', 'html'),
@@ -15,8 +14,32 @@ urlpatterns = patterns('public.views',
 
 urlpatterns += patterns('',
     # 登录
-    url(r'^%s$' % settings.LOGIN_URL[1:], views.LoginView.as_view(), {'tpl': 'public/login.html'}),
+    url(r'^%s$' % settings.LOGIN_URL[1:], views.LoginView.as_view(), {'tpl': 'public/login.html'}, name='login'),
+    # 登出
+    url(r'^%s$' % settings.LOGOUT_URL[1:], 'public.views.logout'),
+    # 注册
     url(r'^signup/$', signup.SignupView.as_view(), {'tpl': 'public/signup.html'}),
+
+    # 重置密码
+    url(r'^password_reset/$', 'django.contrib.auth.views.password_reset',
+        {
+        'template_name': 'public/password_reset_form.html',
+        'email_template_name': 'public/password_reset_email.html',
+        'subject_template_name': 'registration/password_reset_subject.txt'},
+        name='password_reset',),
+
+    url(r'^password_reset/done/$', 'django.contrib.auth.views.password_reset_done',
+        {'template_name': 'public/password_reset_done.html'},
+        name='password_reset_done'),
+
+    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        'django.contrib.auth.views.password_reset_confirm',
+        {'template_name': 'public/password_reset_confirm.html'},
+        name='password_reset_confirm'),
+
+    url(r'^reset/done/$', 'django.contrib.auth.views.password_reset_complete',
+        {'template_name': 'public/password_reset_complete.html'},
+        name='password_reset_complete'),
 )
 
 # urlpatterns += patterns('public.signup',

@@ -74,7 +74,7 @@ def init_bower_static():
 def init_org():
     pass
 
-# todo: 从文件初始化用户org
+
 def init_user():
     user_file = settings.VAR_ROOT + '/user.csv'
     with open(user_file) as f:
@@ -91,8 +91,11 @@ def init_user():
             telephone = r.get('mobile')
             idcard_no = r.get('idcard_no')
             quited = r.get('quited')
-            User.objects.get_or_create(username=username, cn_name=zname, email=email, gender=gender, telephone=telephone,
+            user, created = User.objects.get_or_create(username=username, cn_name=zname, email=email, gender=gender, telephone=telephone,
                                        idcard_no=idcard_no, quited=quited)
+            if created:
+                user.set_password('123456')
+                user.save()
 
 
 def init_conf():
@@ -102,6 +105,13 @@ def init_conf():
     for c in conf:
         name, content, desc = c[0], c[1], c[2]
         Conf.objects.get_or_create(name=name, content=content, desc=desc)
+
+
+def init_site():
+    """初始化站点表"""
+    from django.contrib.sites.models import Site
+    Site.objects.update(domain='dinner.shgt.com', name='生活@上海钢铁')
+
 
 def main():
     """初始化数据"""

@@ -11,14 +11,6 @@ from django.http import HttpResponse, Http404
 from django.contrib.auth.decorators import login_required
 from django.views.generic.detail import DetailView
 from django.views.decorators.http import require_http_methods, require_GET, require_POST, require_safe
-
-
-def index(request, tpl):
-    """Home page"""
-
-    return render(request, tpl, {})
-    # return HttpResponse(content='Hello, world!', status=200, content_type='text/html')
-
 from django.views.generic import View
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
@@ -27,12 +19,21 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
 
+
+def index(request, tpl):
+    """Home page"""
+
+    return render(request, tpl, {})
+    # return HttpResponse(content='Hello, world!', status=200, content_type='text/html')
+
+
+
 class LoginView(View):
 
     def __init__(self):
         super(LoginView, self).__init__()
         self.next_url = reverse('dinner:index')
-        self.deadline = 15  # 15:00
+
 
     def get(self, request, tpl):
         """"""
