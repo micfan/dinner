@@ -68,7 +68,7 @@ class IndexView(View):
             'order_count': Order.objects.filter(calendar__id=self.curr_cal.id).count(),
             'curr_cal': self.curr_cal,
             'curr_now': self.now,
-            'deadline_hour': self.deadline_datetime,
+            'deadline_datetime': self.deadline_datetime,
             'deadline_curr_text': self.deadline_curr_text,
             'curr_provider': self.curr_provider,
             'this_month_cals': this_month_cals,
@@ -107,7 +107,7 @@ class IndexView(View):
                         return HttpResponse(j.error(3).json(), 'application/json')
 
                     # 今天截止时间
-                    if cal.id == self.curr_cal.id and self.now.time() >= self.deadline_datetime:
+                    if cal.id == self.curr_cal.id and self.now.time() >= self.deadline_datetime.time():
                         return HttpResponse(j.error(5).json(), 'application/json')
 
                     # 不用get_or_create()导致sqlite3 database clocked

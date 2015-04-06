@@ -80,11 +80,10 @@ def init_user():
     with open(user_file) as f:
         reader = csv.DictReader(f, delimiter=',')
         for r in reader:
-            print r
             zname = r.get('zname')
             email = r.get('email')
 
-            _pinyin = email.split('@')
+            _pinyin = email.split('@') if email else []
             username = _pinyin[0] if len(_pinyin) == 2 else None
 
             gender = r.get('gender')
@@ -96,6 +95,7 @@ def init_user():
             if created:
                 user.set_password('123456')
                 user.save()
+                print r
 
 
 def init_conf():
