@@ -110,7 +110,7 @@ def init_conf():
 def init_site():
     """初始化站点表"""
     from django.contrib.sites.models import Site
-    Site.objects.update(domain='dinner.shgt.com', name='生活@上海钢铁')
+    Site.objects.update(domain='dinner.micfan.com', name='生活@上海钢铁')
 
 
 def main():
@@ -123,6 +123,7 @@ def main():
     init_conf()
     init_org()
     init_user()
+    init_site()
 
 
 
