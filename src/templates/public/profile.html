@@ -7,10 +7,10 @@
       <label>Username:</label><span>{{ user.username }}</span>
     </li>
     <li>
-      <label>Email:</label><input value="{{ user.email }}" type="email">
+      <label>Email:</label><input value="{{ user.email|default:'' }}" type="email">
     </li>
     <li>
-      <label>Telephone:</label><input value="{{ user.telephone }}" type="text">
+      <label>Telephone:</label><input value="{{ user.telephone|default:'' }}" type="text">
     </li>
   </ul>
 

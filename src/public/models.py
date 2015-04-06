@@ -37,7 +37,10 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email,username, password, telephone=""):
+    # todo:  bug
+    # $ python manage.py createsuperuser
+    # $ ... TypeError: create_superuser() takes at least 4 arguments (3 given)
+    def create_superuser(self, email, username, password, telephone=""):
         """
         Creates and saves a superuser with the given email, username and password.
         """
@@ -80,6 +83,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     birthday = models.DateField(null=True)
     gender = models.IntegerField(null=True, default=1)
     # 离职
+    # todo: ->BoolField
     quited = models.IntegerField(null=True, default=0)
 
     objects = UserManager()
