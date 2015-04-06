@@ -17,6 +17,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.contrib.auth.views import logout as django_logout
 
 
 
@@ -40,9 +41,7 @@ class LoginView(View):
         if request.user.is_authenticated():
             return HttpResponseRedirect(self.next_url)
         else:
-            var = {
-                'deadline': '15:00',
-            }
+            var = {}
 
             return render(request, tpl, var)
 
@@ -56,7 +55,7 @@ class LoginView(View):
             messages.add_message(request, messages.INFO, '无效的用户名或密码。')
             return render(request, tpl)
 
-from django.contrib.auth.views import logout as django_logout
+
 # todo: 用class based view实现吧
 @login_required
 def logout(request):
@@ -75,3 +74,29 @@ def logout(request):
 def html(request, tpl_prefix):
     tpl = 'html/%s.html' % tpl_prefix
     return render(request, tpl)
+
+
+class ProfileView(View):
+
+    def __init__(self):
+        super(ProfileView, self).__init__()
+
+    def get(self, request, tpl):
+        """"""
+        # todo: login_required()
+        if not request.user.is_authenticated():
+            return HttpResponseRedirect(reverse('public:index'))
+        else:
+            var = {}
+
+            return render(request, tpl, var)
+
+    def post(self, request, tpl):
+        user = authenticate(username=request.POST.get('email'), password=request.POST.get('password'))
+        if user is not None and user.is_active:
+            login(request, user)
+            return HttpResponseRedirect(self.next_url)
+        else:
+            # todo: i18n
+            messages.add_message(request, messages.INFO, '无效的用户名或密码。')
+            return render(request, tpl)
