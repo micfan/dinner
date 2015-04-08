@@ -113,8 +113,8 @@ class IndexView(View):
                     # 不用get_or_create()导致sqlite3 database clocked
                     if not Order.objects.filter(calendar=cal, user=request.user).exists():
                         Order.objects.create(calendar=cal, user=request.user)
-                    # 今日已预定数量
-                    j.data = Order.objects.filter(calendar__id=self.curr_cal.id).count()
+                # 今日已预定数量
+                j.data = Order.objects.filter(calendar__id=self.curr_cal.id).count()
             except Calendar.DoesNotExist:
                 j.error(3)
         else:
