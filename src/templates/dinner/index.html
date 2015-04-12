@@ -5,14 +5,14 @@
 
 <div class="dinner">
   <div class="alert alert-info">{{ now }}
-    请点击您需预订晚餐的日期标蓝即可。
+    点击所预订的日期标蓝即可。
     {% if not curr_cal.is_holiday %}
       <strong>今日晚餐：<a href="{% if curr_provider.url %}{{ curr_provider.url }}{% else %}javascript:void(0);{% endif %}"
       title="{{ curr_provider.location }}" target="_blank">{{ curr_provider.name }}</a></strong>，今日已预订
-      <span id="order_count">{{ order_count }}</span>人，
+      <a id="order_count" href="{% url "dinner:order" %}">{{ order_count }}</a>位，
       当前时间{{ curr_now|date:'Y-m-d H:i' }}，
-      晚餐预定截止时间<span class="text-danger">{{ deadline_datetime }}:00</span>，当前报名
-      <span class="text-danger">{{ deadline_curr_text }}</span>
+      预定截止时间<span class="text-danger">{{ deadline_datetime|date:"m-d H:i" }}</span>，当前预定<span class="text-danger">{{ deadline_curr_text }}</span>。
+
     {% else %}
 {#      todo: curr_cal.holiday_mark#}
       <strong>今日{{ curr_cal.holiday_mark }}，不订晚餐

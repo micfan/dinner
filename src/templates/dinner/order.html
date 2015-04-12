@@ -1,0 +1,13 @@
+{% extends "base/base.html" %}
+{% load static from staticfiles %}
+{% block title %}订餐列表{% endblock %}
+{% block body %}
+<h4 class="mb-20">今日晚餐预定，共{{ order_count }}位<span class="color-gray">({{ curr_cal }})</span>：</h4>
+<ul class="std-list1">
+  {% for i in j.data %}
+    <li class="{% cycle 'odd' 'even' %}"><span>{{ forloop.counter }}.&nbsp;</span><span>{{ i }}</span></li>
+  {% empty %}
+    暂无预定
+  {% endfor %}
+</ul>
+{% endblock %}
