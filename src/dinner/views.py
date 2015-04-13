@@ -144,7 +144,7 @@ class OrderView(View):
         }).order_by('username')
         j.message = o.count()
         order_users = o.values_list('cn_name', flat=True)
-        order_users = [u.encode('utf-8') for u in order_users]
+        order_users = [u.encode('utf-8') for u in order_users if u]
         j.data = order_users
 
         format = request.GET.get('f')
