@@ -1,5 +1,4 @@
 src/settings/__init__.py
-src/settings/prod.py
 
 src/var/dev.db
 src/var/*.csv
