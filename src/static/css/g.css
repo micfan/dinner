@@ -1,13 +1,12 @@
 body {
-  padding-top: 70px;
   padding-bottom: 30px;
 }
 
-/* todo: 此处样式影响登录表单css动画*/
-@media  {
-    /*.container {*/
-      /*min-height: 580px;*/
-    /*}*/
+/* todo: 登录表单css动画*/
+
+
+.navbar {
+  border-radius: 0;
 }
 
 .color-gray { color: darkgray;}
@@ -41,9 +40,27 @@ ul {
   margin: 5px 0;
 }
 
-.navbar-fixed-top {
-  max-height: 35px;
+.navbar {
+    min-height: 28px;
 }
+
+.navbar-brand {
+  padding: 0 12px;
+  font-size: 14px;
+  line-height: 28px;
+}
+
+.navbar-nav>li>a {
+    line-height: 28px;
+}
+.nav>li>a {
+    display: inline;
+    padding: 0 12px;
+}
+
+/*.navbar-fixed-top {*/
+  /*max-height: 28px;*/
+/*}*/
 
 .navbar-nav {
   float: none;
