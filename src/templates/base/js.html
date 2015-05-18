@@ -2,24 +2,21 @@
 {% load compress %}
 
 {% compress js %}
-  {% if debug %}
-    <script src="{% static 'bower/jquery/dist/jquery.min.js' %}"></script>
-  {% else %}
-    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="{% static 'bower/jquery/dist/jquery.min.js' %}"></script>
+  {% if not debug %}
+    <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?489cf5f55a401d34626b48e87d10550c";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
   {% endif %}
   <script src="{% static 'bower/bootstrap/dist/js/bootstrap.min.js' %}"></script>
   <script src="{% static 'bower/vue/dist/vue.min.js' %}"></script>
   <script src="{% static 'js/g.js' %}"></script>
-  <script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?489cf5f55a401d34626b48e87d10550c";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
-
 {% endcompress %}
 
 {% block js %}
