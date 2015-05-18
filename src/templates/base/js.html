@@ -1,9 +1,12 @@
 {% load static from staticfiles %}
-<script src="{% static 'bower/jquery/dist/jquery.min.js' %}"></script>
+{% load compress %}
 
-<script src="{% static 'bower/bootstrap/dist/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'bower/vue/dist/vue.min.js' %}"></script>
-<script src="{% static 'js/g.js' %}"></script>
+{% compress js %}
+  <script src="{% static 'bower/jquery/dist/jquery.min.js' %}"></script>
+  <script src="{% static 'bower/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'bower/vue/dist/vue.min.js' %}"></script>
+  <script src="{% static 'js/g.js' %}"></script>
+{% endcompress %}
 
 {% block js %}
 {% endblock %}
