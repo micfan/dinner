@@ -6,7 +6,8 @@
     "jquery": "*",
     "vue": "*",
     "requirejs": "*",
-    "underscore":  "*"
+    "underscore": "*",
+    "jquery.easyui": "*"
   },
   "devDependencies": {}
 }
