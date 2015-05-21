@@ -1,0 +1,11 @@
+{% extends 'base/base.html' %}
+{% block sidebar %}
+  {% include 'base/include_sidebar.html' %}
+{% endblock %}
+{% block body %}
+  <div class="col-sm-9 col-md-10 content box">
+    <h3 class="page-header">{% block header %}{% endblock %}</h3>
+    {% block content %}
+    {% endblock %}
+  </div>
+{% endblock %}
