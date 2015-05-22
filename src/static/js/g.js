@@ -59,6 +59,12 @@ window.mic = {
   }
 };
 
+if (!window.mic.DEBUG && typeof window.console === 'object') {
+  var s = '喜欢看Mic的代码，还是发现了什么bug？不如和我们一起为本站添砖加瓦吧！\n' +
+    'https://github.com/micfan/dinner';
+  window.console.log(s);
+}
+
 
 
 
