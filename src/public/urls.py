@@ -2,7 +2,7 @@
 from django.conf.urls import patterns, url, include
 from django.conf import settings
 
-from public import views, signup, profile, log
+from public import views, signup, profile, log, mails
 
 urlpatterns = patterns('public.views',
     url(r'^$', 'index', {'tpl': 'public/index.html'}, name='index'),
@@ -38,6 +38,7 @@ urlpatterns += patterns('',
     # todo: 泛username类型URL。无法区别常规URL与username based URL, 故仅去掉斜杠以区分正则
     # url(r'^(?P<username>\w+)$', views.ProfileView.as_view(), {'tpl': 'public/profile.html'}),
     url(r'^profile/$', views.ProfileView.as_view(), {'tpl': 'public/profile.html'}, name='profile'),
+    url(r'^message/(?P<mail_id>.+)?/?$', mails.MailView.as_view(), {'tpl': 'public/mail/mail.html'}, name='mail'),
 
     url(r'^api/', include('apis.urls'), name='apis'),
 )

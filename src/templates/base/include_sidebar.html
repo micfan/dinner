@@ -3,7 +3,8 @@
   <h3 class="box-header">个人设置</h3>
   <ul class="nav nav-sidebar">
     {# todo: 判断URL显示active #}
-    <li class="{% active_sidebar 'profile' %}"><a href="#">个人资料 <span class="sr-only">(current)</span></a></li>
+    <li class="{% active_sidebar_by_path 'profile' %}"><a href="/profile/">个人资料 <span class="sr-only">(current)</span></a></li>
+    <li class="{% active_sidebar_by_path 'message' %}"><a href="/message/">我的消息 <span class="sr-only">(current)</span></a></li>
 {#    <li><a href="#">Reports</a></li>#}
 {#    <li><a href="#">Analytics</a></li>#}
 {#    <li><a href="#">Export</a></li>#}

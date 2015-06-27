@@ -28,7 +28,6 @@ def index(request, tpl):
     # return HttpResponse(content='Hello, world!', status=200, content_type='text/html')
 
 
-from django.contrib.auth.views import login as loo
 class LoginView(View):
 
     def __init__(self):

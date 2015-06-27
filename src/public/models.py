@@ -125,6 +125,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.is_admin
 
 
+# class Mail(models.Model):
+#     """消息"""
+#     sender = models.ForeignKey(User)
+
 class Calendar(models.Model):
     """日历"""
     year = models.SmallIntegerField('年')
