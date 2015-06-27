@@ -1,5 +1,6 @@
 {% extends "base/base.html" %}
 {% load static from staticfiles %}
+{% load tags_request %}
 {% block title %}登录{% endblock %}
 {% block css %}
   <link href="{% static 'css/login.css' %}" rel="stylesheet">
@@ -20,6 +21,7 @@
         <h2 class="form-signin-heading">Please sign in</h2>
         <input type="text" class="form-control" placeholder="Username or E-mail" required="" autofocus="" name="email">
         <input type="password" class="form-control" placeholder="Password" required="" name="password">
+        <input type="hidden" name="next" value="{{ next }}{{ request.GET.next }}">
         <a class="forgot-password" href="{% url 'password_reset' %}">忘记密码?</a>
 {#todo:#}
 {#        <label class="checkbox">#}

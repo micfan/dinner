@@ -15,9 +15,11 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
+from .base_views import BaseLoginRequiredView
+
 
 # todo: 学signup，建表单
-class PasswordView(View):
+class PasswordView(BaseLoginRequiredView):
 
     def __init__(self):
         super(PasswordView, self).__init__()
@@ -25,11 +27,11 @@ class PasswordView(View):
     def get(self, request, tpl):
         """"""
         # todo: login_require()
-        if not request.user.is_authenticated():
-            login_url = reverse('public:login')
-            return HttpResponseRedirect(login_url)
-        else:
-            return render(request, tpl, {})
+        # if not request.user.is_authenticated():
+        #     login_url = reverse('public:login')
+        #     return HttpResponseRedirect(login_url)
+        # else:
+        return render(request, tpl, {})
 
     def post(self, request, tpl):
         user = authenticate(username=request.POST.get('email'), password=request.POST.get('password'))

@@ -19,7 +19,7 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.views import logout as django_logout
 
-
+from .base_views import BaseLoginRequiredView
 
 def index(request, tpl):
     """Home page"""
@@ -28,7 +28,7 @@ def index(request, tpl):
     # return HttpResponse(content='Hello, world!', status=200, content_type='text/html')
 
 
-
+from django.contrib.auth.views import login as loo
 class LoginView(View):
 
     def __init__(self):
@@ -49,6 +49,7 @@ class LoginView(View):
         user = authenticate(username=request.POST.get('email'), password=request.POST.get('password'))
         if user is not None and user.is_active:
             login(request, user)
+            self.next_url = request.POST.get('next') if request.POST.get('next') else self.next_url
             return HttpResponseRedirect(self.next_url)
         else:
             # todo: i18n
@@ -66,6 +67,7 @@ def logout(request):
             next_page = '/'
         # todo: 登出用户
         return django_logout(request, next_page)
+
     if request.method == 'POST':
         js = {'status': 1, 'message': 'ok', 'ec': 0}
         return HttpResponse(content=json.dumps(js), status=200, content_type='application/json')
@@ -76,20 +78,16 @@ def html(request, tpl_prefix):
     return render(request, tpl)
 
 
-class ProfileView(View):
+class ProfileView(BaseLoginRequiredView):
 
     def __init__(self):
         super(ProfileView, self).__init__()
 
     def get(self, request, tpl):
         """"""
-        # todo: login_required()
-        if not request.user.is_authenticated():
-            return HttpResponseRedirect(reverse('public:login'))
-        else:
-            var = {}
+        var = {}
 
-            return render(request, tpl, var)
+        return render(request, tpl, var)
 
     def post(self, request, tpl):
         user = authenticate(username=request.POST.get('email'), password=request.POST.get('password'))
