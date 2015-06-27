@@ -5,7 +5,7 @@ from django.conf import settings
 from public import views, signup, profile, log
 
 urlpatterns = patterns('public.views',
-    url(r'^$', 'index', {'tpl': 'public/index.html'}),
+    url(r'^$', 'index', {'tpl': 'public/index.html'}, name='index'),
 
 
     # HTML
@@ -29,22 +29,17 @@ urlpatterns += patterns('',
         'subject_template_name': 'registration/password_reset_subject.txt'},
         name='password_reset',),
 
-    url(r'^password_reset/done/$', 'django.contrib.auth.views.password_reset_done',
-        {'template_name': 'public/password_reset_done.html'},
-        name='password_reset_done'),
+    url(r'^password_reset/done/$', 'django.contrib.auth.views.password_reset_done', {'template_name': 'public/password_reset_done.html'}, name='password_reset_done'),
 
-    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-        'django.contrib.auth.views.password_reset_confirm',
-        {'template_name': 'public/password_reset_confirm.html'},
-        name='password_reset_confirm'),
+    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', 'django.contrib.auth.views.password_reset_confirm', {'template_name': 'public/password_reset_confirm.html'}, name='password_reset_confirm'),
 
-    url(r'^reset/done/$', 'django.contrib.auth.views.password_reset_complete',
-        {'template_name': 'public/password_reset_complete.html'},
-        name='password_reset_complete'),
+    url(r'^reset/done/$', 'django.contrib.auth.views.password_reset_complete', {'template_name': 'public/password_reset_complete.html'}, name='password_reset_complete'),
 
     # todo: 泛username类型URL。无法区别常规URL与username based URL, 故仅去掉斜杠以区分正则
     # url(r'^(?P<username>\w+)$', views.ProfileView.as_view(), {'tpl': 'public/profile.html'}),
     url(r'^profile/$', views.ProfileView.as_view(), {'tpl': 'public/profile.html'}, name='profile'),
+
+    url(r'^api/', include('apis.urls'), name='apis'),
 )
 
 urlpatterns += patterns('',

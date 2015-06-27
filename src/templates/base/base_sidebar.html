@@ -4,8 +4,11 @@
 {% endblock %}
 {% block body %}
   <div class="col-sm-9 col-md-10 content box">
-    <h3 class="page-header">{% block header %}{% endblock %}</h3>
-    {% block content %}
-    {% endblock %}
+    <h3 class="box-header">{% block header %}{% endblock %}</h3>
+    <div class="box-body">
+      {% block content %}
+      {% endblock %}
+    </div>
+
   </div>
 {% endblock %}

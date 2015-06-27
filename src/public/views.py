@@ -85,7 +85,7 @@ class ProfileView(View):
         """"""
         # todo: login_required()
         if not request.user.is_authenticated():
-            return HttpResponseRedirect(reverse('public:index'))
+            return HttpResponseRedirect(reverse('public:login'))
         else:
             var = {}
 
