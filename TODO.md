@@ -26,3 +26,11 @@ Django Site多站点?
 重命名仓库为ShgtDaily
 Django admin doc
 多国语言配置
+
+[Django信号机制](https://docs.djangoproject.com/en/1.8/topics/signals/)
+
+[权限系统研究]()
+
+[Bootstrap模版聚合](http://bootstraptaste.com)
+
+[ReactJs教程](https://github.com/arkency/reactjs_koans)

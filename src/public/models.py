@@ -1,6 +1,7 @@
 # coding=utf-8
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
+from django.core.cache import cache
 
 
 # todo: Group设置：供应商组，采购商组？
@@ -124,10 +125,27 @@ class User(AbstractBaseUser, PermissionsMixin):
         # Simplest possible answer: All admins are staff
         return self.is_admin
 
+    def get_unread_mails(self):
+        """未读邮件"""
+        try:
+            # todo: 缓存
+            return Mail.objects.filter(to_user=self, been_read=False, is_spam=False, trashed=False)
+        except Exception, e:
+            # todo: 记录Django日志
+            return None
 
-# class Mail(models.Model):
-#     """消息"""
-#     sender = models.ForeignKey(User)
+    def has_unread_mails(self):
+        return self.get_unread_mails() is not None
+
+    def count_unread_mails(self):
+        """未读邮件数量"""
+        try:
+            # todo: 缓存
+            return self.get_unread_mail().count()
+        except Exception, e:
+            # todo: 记录Django日志
+            return 0
+
 
 class Calendar(models.Model):
     """日历"""
@@ -158,19 +176,61 @@ class Conf(models.Model):
 
 # todo: websocket online chat
 # todo: gevent libs researching
-# todo:
+
+
+# todo: Markdown 支持
+# todo: (山寨豆瓣)顶部导航条计算信消息
+# todo: 计算垃圾邮件，贝叶斯：http://www.ruanyifeng.com/blog/2011/08/bayesian_inference_part_one.html
+# 条件概率：事件B发生的情况下，事件A发生的概率
+#   P(A|B) = P(AnB)/P(B) = P(A)*P(B|A) / P(B)
 # class Mail(models.Model):
-#     """消息"""
-#     user = models.ForeignKey(User)
-#     content = models.CharField('内容', max_length=50)
+#     """站内邮件"""
+#     from_user = models.ForeignKey(User)
+#     to_user = models.ForeignKey(User)
+#     content = models.TextField('内容', max_length=5000)
 #     been_read = models.BooleanField('已读', default=False)
-#     trashed = models.BooleanField('已删除', default=False)
-#     spam = models.BooleanField('垃圾', default=False)
+#     trashed = models.BooleanField('已删除邮件', default=False)
+#     is_spam = models.BooleanField('是垃圾邮件', default=False)
 #     created_at = models.DateTimeField(auto_now_add=True)
 #
 #     def __unicode__(self):
-#         return self.name
-
+#         return self.content
+#
+#     @classmethod
+#     def get_unread_mails(self, to_user):
+#         # todo: 什么是绑定？
+#         if hasattr(to_user, 'get_unread_mails'):
+#             return to_user.get_unread_mail()
+#         else:
+#             return None
+#
+#     @classmethod
+#     def get_all_mails(self, to_user):
+#         # todo: 序列化 !!!
+#         if hasattr(to_user, 'get_all_mails'):
+#             return to_user.get_all_mails()
+#         else:
+#             return None
+#
+#     def move_to_trash(self):
+#         self.trashed = True
+#         self.save()
+#         return True
+#
+#     def mark_as_spam(self):
+#         self.is_spam = True
+#         self.save()
+#         return True
+#
+#     def mark_has_been_read(self):
+#         self.been_read = True
+#         self.save()
+#         return True
+#
+#     def cancel_trashed(self):
+#         self.trashed = False
+#         self.save()
+#
 
 # class FEException(models.Model):
 #     """前端异常"""
