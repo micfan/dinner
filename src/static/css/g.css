@@ -407,3 +407,6 @@ form p > input[type=submit]:hover {
 .std-list2 .even {}
 
 /*标准边距*/
+.std-mr5 {margin-right: 5px;}
+.std-ml5 {margin-left: 5px;}
+.std-mr10 {margin-right: 10px;}
