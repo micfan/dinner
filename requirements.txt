@@ -10,3 +10,4 @@ django-pipeline
 multimethods
 simplejson
 django_compressor
+bootstrap-admin
