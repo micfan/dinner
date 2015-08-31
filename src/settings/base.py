@@ -32,6 +32,7 @@ INSTALLED_APPS = (
     'poll',
     'misc',
 
+    'bootstrap_admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
