@@ -96,18 +96,21 @@ ul {
 .nav-sidebar {
 
 }
+.nav-sidebar > li:last-child {
+  border-bottom: none;
+}
+.nav-sidebar > li {
+    border-bottom: 1px solid #d8d8d8;
+}
 .nav-sidebar > li > a {
   padding: 8px 10px;
-  border-bottom: 1px solid #d8d8d8;
+
   /*padding: 9px 10px 10px;*/
   font-size: 14px;
   line-height: 18px;
   display: block;
 }
-.nav-sidebar > li > a:last-child {
-  border-bottom: none;
 
-}
 
 .nav-sidebar > .active > a,
 .nav-sidebar > .active > a:hover,
@@ -192,6 +195,11 @@ ul {
   border-bottom-right-radius: 3px;
   color: #666;
   font-size: 13px;
+}
+
+.btn-linear-gradient-fc {
+    background-image: -webkit-linear-gradient(#fcfcfc, #eee);
+    background-image: linear-gradient(#fcfcfc, #eee);
 }
 
 .sidebar .box-header {
@@ -406,7 +414,12 @@ form p > input[type=submit]:hover {
 .std-list2 .odd { background-color: #f9f9f9;}
 .std-list2 .even {}
 
+
 /*标准边距*/
 .std-mr5 {margin-right: 5px;}
 .std-ml5 {margin-left: 5px;}
 .std-mr10 {margin-right: 10px;}
+
+/*Profile Page*/
+.profile-avatar { with: 100%;}
+

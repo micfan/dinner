@@ -90,6 +90,10 @@ class IndexView(View):
         j = JsonResult(message='预定成功', data=0)
         if not request.user.is_authenticated():
             return HttpResponse(j.error(4).json(), 'application/json')
+        
+        # TODO: 也可以用如下:
+        # $.ajax 发送{data:JSON.stringify(form1)}, 然而并没有什么卵用，除非raw存储到MongoDB
+        # params = json.loads(request.body)
 
         cal_id = request.POST.get('cal_id')
         has_booked = request.POST.get('has_booked')
