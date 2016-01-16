@@ -11,11 +11,11 @@ from dinner.models import CalendarProvider
 import subprocess
 import csv
 
-
+CURRENT_YEAR = 2016
 
 def init_calendar():
     """初始化日历"""
-    year, month = 2015, 12
+    year, month = CURRENT_YEAR, 12
 
     for m in range(1, month+1):
         c = calendar.monthcalendar(year, m)
@@ -54,7 +54,7 @@ def init_provider():
 
 def init_calendar_provider():
     """初始化每日餐厅配置: 3，4月"""
-    cals = Calendar.objects.filter(year=2015, month__in=(3, 4, 5, 6, 7, 8, 9, 10, 11, 12))
+    cals = Calendar.objects.filter(year=2015, month__in=(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12))
     try:
         provider = Org.objects.get(name='宝升阁')
         for c in cals:
