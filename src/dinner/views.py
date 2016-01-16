@@ -59,7 +59,7 @@ class IndexView(View):
             }
         else:
             select = {"has_booked": 0}
-        this_month_cals = Calendar.objects.filter(year=2015, month=self.now.month).extra(select=select
+        this_month_cals = Calendar.objects.filter(year=datetime.datetime.now().year, month=self.now.month).extra(select=select
             ).order_by('day')
         if not this_month_cals.exists():
             raise Exception('日历配置错误')
